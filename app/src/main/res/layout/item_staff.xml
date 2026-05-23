@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="6dp"
+    app:cardBackgroundColor="#212030"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- Avatar đại diện nhỏ -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="12dp"
+            android:background="@android:drawable/sym_def_app_icon"
+            android:backgroundTint="#00B0FF" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtStaffListName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nguyễn Văn A"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtStaffListCodePhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="NV0001 | SĐT: 0912345678"
+                android:textColor="#B0A8B9"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtStaffListEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:text="email@example.com"
+                android:textColor="#B0A8B9"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Nút sửa nhân viên -->
+        <ImageView
+            android:id="@+id/btnEditStaff"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="8dp"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_menu_edit"
+            app:tint="#00B0FF" />
+
+        <!-- Nút xóa nhân viên -->
+        <ImageView
+            android:id="@+id/btnDeleteStaff"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_menu_delete"
+            app:tint="#FF5252" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

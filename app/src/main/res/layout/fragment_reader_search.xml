@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#151421"
+    android:padding="16dp">
+
+    <!-- Tìm kiếm -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchLayoutReaderCatalog"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Tìm kiếm tựa sách, tác giả..."
+        android:textColorHint="#B0A8B9"
+        app:boxStrokeColor="#6C63FF"
+        app:boxStrokeWidthFocused="2dp"
+        app:hintTextColor="#6C63FF"
+        app:layout_constraintEnd_toStartOf="@id/spinnerCatReader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@android:drawable/ic_menu_search"
+        app:startIconTint="#B0A8B9">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editSearchReaderCatalog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Hộp chọn Thể loại -->
+    <Spinner
+        android:id="@+id/spinnerCatReader"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:backgroundTint="#212030"
+        app:layout_constraintBottom_toBottomOf="@id/searchLayoutReaderCatalog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchLayoutReaderCatalog" />
+
+    <!-- RecyclerView danh sách sách tra cứu -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewReaderCatalog"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchLayoutReaderCatalog"
+        tools:listitem="@android:layout/simple_list_item_2" />
+
+    <TextView
+        android:id="@+id/txtEmptyReaderCatalog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Không tìm thấy cuốn sách nào phù hợp!"
+        android:textColor="#B0A8B9"
+        android:textSize="15sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

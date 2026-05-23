@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#212030"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:text="CHỈNH SỬA ĐẦU SÁCH"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Tiêu đề -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Tiêu đề sách"
+            android:textColorHint="#B0A8B9"
+            app:boxStrokeColor="#6C63FF"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintTextColor="#6C63FF">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtTitleEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Tác giả -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Tác giả"
+            android:textColorHint="#B0A8B9"
+            app:boxStrokeColor="#6C63FF"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintTextColor="#6C63FF">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtAuthorEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Spinner Thể loại -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Thể loại"
+            android:textColor="#B0A8B9"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/spinDialogCatEdit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:backgroundTint="#2E2C4D" />
+
+        <!-- Trạng thái đầu sách giấy (hàng loạt) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Trạng thái (áp dụng bản sao chưa mượn)"
+            android:textColor="#B0A8B9"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/spinBookStatusEdit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:backgroundTint="#2E2C4D" />
+
+        <!-- Phần cấu hình Sách Online -->
+        <LinearLayout
+            android:id="@+id/layoutOnlineOnlyEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- URL tài liệu -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="URL tài liệu"
+                android:textColorHint="#B0A8B9"
+                app:boxStrokeColor="#6C63FF"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="#6C63FF">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtUrlEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textUri"
+                    android:textColor="#FFFFFF" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Định dạng tài liệu -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="Định dạng"
+                android:textColorHint="#B0A8B9"
+                app:boxStrokeColor="#6C63FF"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="#6C63FF">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtFormatEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveBookEdit"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            android:text="LƯU THAY ĐỔI"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:backgroundTint="#00B0FF"
+            app:cornerRadius="10dp" />
+
+    </LinearLayout>
+</ScrollView>

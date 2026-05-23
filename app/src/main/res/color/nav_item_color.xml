@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Trạng thái chọn (Active) -->
+    <item android:state_checked="true" android:color="#6C63FF" />
+    <!-- Trạng thái mặc định (Inactive) -->
+    <item android:color="#B0A8B9" />
+</selector>

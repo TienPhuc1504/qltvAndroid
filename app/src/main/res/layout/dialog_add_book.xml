@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#212030"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:text="THÊM ĐẦU SÁCH MỚI"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Tiêu đề -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Tiêu đề sách"
+            android:textColorHint="#B0A8B9"
+            app:boxStrokeColor="#6C63FF"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintTextColor="#6C63FF">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Tác giả -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Tác giả"
+            android:textColorHint="#B0A8B9"
+            app:boxStrokeColor="#6C63FF"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintTextColor="#6C63FF">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Spinner Thể loại -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Thể loại"
+            android:textColor="#B0A8B9"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/spinDialogCat"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:backgroundTint="#2E2C4D" />
+
+        <!-- Lựa chọn Loại sách -->
+        <RadioGroup
+            android:id="@+id/rgType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:checkedButton="@id/rbPaper"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbPaper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sách giấy"
+                android:textColor="#FFFFFF" />
+
+            <RadioButton
+                android:id="@+id/rbOnline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sách online"
+                android:textColor="#FFFFFF" />
+        </RadioGroup>
+
+        <!-- Phần cấu hình Sách Giấy -->
+        <LinearLayout
+            android:id="@+id/layoutPaperOnly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="Số lượng nhập kho ban đầu"
+                android:textColorHint="#B0A8B9"
+                app:boxStrokeColor="#6C63FF"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="#6C63FF">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtQty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="1"
+                    android:textColor="#FFFFFF" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <!-- Phần cấu hình Sách Online -->
+        <LinearLayout
+            android:id="@+id/layoutOnlineOnly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- URL tài liệu -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="URL tài liệu (link đọc/tải)"
+                android:textColorHint="#B0A8B9"
+                app:boxStrokeColor="#6C63FF"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="#6C63FF">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textUri"
+                    android:textColor="#FFFFFF" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Định dạng tài liệu -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="Định dạng (PDF, EPUB, ...)"
+                android:textColorHint="#B0A8B9"
+                app:boxStrokeColor="#6C63FF"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="#6C63FF">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtFormat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PDF"
+                    android:textColor="#FFFFFF" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveBook"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            android:text="LƯU ĐẦU SÁCH"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:backgroundTint="#6C63FF"
+            app:cornerRadius="10dp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#2E2C4D"
+    android:layout_marginVertical="4dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtCopyCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S0001-Q001"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtCopyInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Vị trí: Kệ A1 | Mới nhập"
+            android:textColor="#B0A8B9"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <!-- Trạng thái quyển sách -->
+    <TextView
+        android:id="@+id/txtCopyStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="CO_SAN"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <!-- Edit copy -->
+    <ImageView
+        android:id="@+id/btnEditCopy"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Edit copy"
+        android:padding="6dp"
+        android:src="@android:drawable/ic_menu_edit"
+        app:tint="#00B0FF" />
+
+    <!-- Delete copy -->
+    <ImageView
+        android:id="@+id/btnDeleteCopy"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Delete copy"
+        android:padding="6dp"
+        android:src="@android:drawable/ic_menu_delete"
+        app:tint="#FF5252" />
+
+</LinearLayout>

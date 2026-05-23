@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#151421"
+    android:padding="16dp">
+
+    <!-- Ô Tìm kiếm sách -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchLayout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Tìm kiếm sách hoặc tác giả..."
+        android:textColorHint="#B0A8B9"
+        app:boxStrokeColor="#6C63FF"
+        app:boxStrokeWidthFocused="2dp"
+        app:hintTextColor="#6C63FF"
+        app:layout_constraintEnd_toStartOf="@id/spinnerCategory"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@android:drawable/ic_menu_search"
+        app:startIconTint="#B0A8B9">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Hộp chọn Thể loại -->
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:backgroundTint="#212030"
+        app:layout_constraintBottom_toBottomOf="@id/searchLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchLayout" />
+
+    <!-- Danh sách hiển thị -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewBooks"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout"
+        tools:listitem="@android:layout/simple_list_item_2" />
+
+    <!-- Trạng thái trống (Ẩn mặc định) -->
+    <TextView
+        android:id="@+id/txtEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Không tìm thấy sách nào phù hợp!"
+        android:textColor="#B0A8B9"
+        android:textSize="15sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Nút thêm sách mới (FAB) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="Add book"
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="#6C63FF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="#FFFFFF" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

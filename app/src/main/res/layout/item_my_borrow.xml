@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="6dp"
+    app:cardBackgroundColor="#212030"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtMyBorrowBookTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Python cơ bản"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/badgeMyBorrowStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#2E2C4D"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:text="DANG_MUON"
+                android:textColor="#FF9800"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="8dp"
+            android:background="#2E2C4D" />
+
+        <TextView
+            android:id="@+id/txtMyBorrowAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tác giả: John Smith | Bản sao: S0003-Q002"
+            android:textColor="#B0A8B9"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txtMyBorrowDates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Mượn: 2026-05-24 | Hạn trả: 2026-06-07"
+            android:textColor="#B0A8B9"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txtMyBorrowReturnDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Ngày trả thực: -"
+            android:textColor="#4CAF50"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtMyBorrowFine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phạt quá hạn: 15,000 VND"
+                android:textColor="#FF5252"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!-- Nút đọc trực tuyến sách online -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMyBorrowReadOnline"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="ĐỌC SÁCH ONLINE"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:backgroundTint="#00B0FF"
+                app:cornerRadius="6dp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

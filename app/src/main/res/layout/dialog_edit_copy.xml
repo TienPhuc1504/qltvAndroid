@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#212030"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:text="CHỈNH SỬA BẢN SAO QLTV"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- Vị trí kệ -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:hint="Vị trí kệ mới"
+        android:textColorHint="#B0A8B9"
+        app:boxStrokeColor="#6C63FF"
+        app:boxStrokeWidthFocused="2dp"
+        app:hintTextColor="#6C63FF">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtEditCopyViTri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Ghi chú -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:hint="Ghi chú bản sao"
+        android:textColorHint="#B0A8B9"
+        app:boxStrokeColor="#6C63FF"
+        app:boxStrokeWidthFocused="2dp"
+        app:hintTextColor="#6C63FF">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtEditCopyGhiChu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Trạng thái -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Trạng thái bản sao"
+        android:textColor="#B0A8B9"
+        android:textSize="12sp" />
+
+    <Spinner
+        android:id="@+id/spinEditCopyStatus"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:backgroundTint="#2E2C4D" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSaveCopyEdit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="LƯU THAY ĐỔI"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:backgroundTint="#00B0FF"
+        app:cornerRadius="10dp" />
+
+</LinearLayout>

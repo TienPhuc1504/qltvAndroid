@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="6dp"
+    app:cardBackgroundColor="#212030"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtCardReqReader"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Trần Thị B (DG0001)"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/badgeCardReqStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#2E2C4D"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:text="CHO_DUYET"
+                android:textColor="#FF9800"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="8dp"
+            android:background="#2E2C4D" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yêu cầu cấp lại / In thẻ độc giả vật lý"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/txtCardReqDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Ngày yêu cầu: 2026-05-24 02:10"
+            android:textColor="#B0A8B9"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/layoutCardReqActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRejectCardReq"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:text="TỪ CHỐI"
+                android:textColor="#FF5252"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnApproveCardReq"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginStart="8dp"
+                android:text="TIẾP NHẬN"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:backgroundTint="#6C63FF"
+                app:cornerRadius="6dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPrintCardReq"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginStart="8dp"
+                android:text="ĐÃ IN THẺ"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:backgroundTint="#00B0FF"
+                app:cornerRadius="6dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnConfirmCardPickup"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginStart="8dp"
+                android:text="ĐÃ GIAO THẺ"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:backgroundTint="#4CAF50"
+                app:cornerRadius="6dp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

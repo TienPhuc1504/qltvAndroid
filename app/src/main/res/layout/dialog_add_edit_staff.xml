@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#212030"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtStaffDialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:text="THÊM NHÂN VIÊN MỚI"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Username (Chỉ hiển thị khi thêm mới) -->
+        <EditText
+            android:id="@+id/edtStaffDialogUsername"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="#151421"
+            android:hint="Tên đăng nhập"
+            android:textColorHint="#B0A8B9"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            android:singleLine="true" />
+
+        <!-- Password (Chỉ hiển thị khi thêm mới) -->
+        <EditText
+            android:id="@+id/edtStaffDialogPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="#151421"
+            android:hint="Mật khẩu"
+            android:textColorHint="#B0A8B9"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+
+        <!-- Họ tên -->
+        <EditText
+            android:id="@+id/edtStaffDialogFullName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="#151421"
+            android:hint="Họ và tên"
+            android:textColorHint="#B0A8B9"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            android:singleLine="true" />
+
+        <!-- Mã nhân viên -->
+        <EditText
+            android:id="@+id/edtStaffDialogCode"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="#151421"
+            android:hint="Mã nhân viên (ví dụ: NV001)"
+            android:textColorHint="#B0A8B9"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            android:singleLine="true" />
+
+        <!-- Số điện thoại -->
+        <EditText
+            android:id="@+id/edtStaffDialogPhone"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="#151421"
+            android:hint="Số điện thoại"
+            android:textColorHint="#B0A8B9"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            android:inputType="phone"
+            android:singleLine="true" />
+
+        <!-- Email -->
+        <EditText
+            android:id="@+id/edtStaffDialogEmail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="#151421"
+            android:hint="Email"
+            android:textColorHint="#B0A8B9"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            android:inputType="textEmailAddress"
+            android:singleLine="true" />
+
+        <!-- Địa chỉ -->
+        <EditText
+            android:id="@+id/edtStaffDialogAddress"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="20dp"
+            android:background="#151421"
+            android:hint="Địa chỉ"
+            android:textColorHint="#B0A8B9"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            android:singleLine="true" />
+
+        <!-- Nút lưu -->
+        <Button
+            android:id="@+id/btnStaffDialogSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00B0FF"
+            android:text="LƯU TÀI KHOẢN"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>

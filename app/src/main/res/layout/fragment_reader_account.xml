@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#151421"
+    android:orientation="vertical">
+
+    <!-- THANH TIÊU ĐỀ ĐỘNG (HEADER BAR) -->
+    <RelativeLayout
+        android:id="@+id/layoutReaderProfileHeader"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#212030"
+        android:paddingHorizontal="16dp">
+
+        <!-- Nút quay lại (chỉ hiển thị khi đang xem Hộp Thư) -->
+        <ImageView
+            android:id="@+id/btnProfileBack"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_menu_revert"
+            android:visibility="gone"
+            app:tint="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/txtProfileHeaderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="TÀI KHOẢN CỦA BẠN"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Nút ba chấm cho Đăng xuất -->
+        <ImageView
+            android:id="@+id/btnReaderProfileLogoutMenu"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_menu_more"
+            app:tint="#FFFFFF" />
+    </RelativeLayout>
+
+    <!-- KHUNG CHỨA PANEL ĐỘNG -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- PANEL 1: GIAO DIỆN HỒ SƠ CHÍNH -->
+        <ScrollView
+            android:id="@+id/layoutReaderAccountHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- 1. THÈ ĐỘC GIẢ KỸ THUẬT SỐ (DIGITAL MEMBER CARD) -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="6dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/login_gradient"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/txtProfileCardApp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="THƯ VIỆN SỐ QLTV"
+                            android:textColor="#FFFFFF"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtProfileCardApp"
+                            android:text="DIGITAL MEMBER CARD"
+                            android:textColor="#00B0FF"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtProfileCardName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="HỌ VÀ TÊN"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txtProfileCardCode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="MÃ ĐG: DGxxxx"
+                                android:textColor="#B0A8B9"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/txtProfileCardExpiry"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="HẠN THẺ: yyyy-MM-dd"
+                                android:textColor="#FF5252"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <!-- Chỗ quét QR Code mô phỏng -->
+                        <ImageView
+                            android:id="@+id/imgProfileQR"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="#FFFFFF"
+                            android:contentDescription="QR Code"
+                            android:padding="6dp"
+                            android:src="@android:drawable/ic_menu_myplaces"
+                            app:tint="#0F101E" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- 2. THẺ CHI TIẾT CÁ NHÂN -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="#212030"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Thông tin độc giả"
+                            android:textColor="#00B0FF"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <!-- Mã độc giả -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:text="Mã độc giả:"
+                                android:textColor="#B0A8B9"
+                                android:textSize="13sp" />
+                            <TextView
+                                android:id="@+id/txtProfileCode"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="DG0001"
+                                android:textColor="#FFFFFF"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <!-- Điện thoại -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:text="Điện thoại:"
+                                android:textColor="#B0A8B9"
+                                android:textSize="13sp" />
+                            <TextView
+                                android:id="@+id/txtProfilePhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="0912345678"
+                                android:textColor="#FFFFFF"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <!-- Email -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:text="Email:"
+                                android:textColor="#B0A8B9"
+                                android:textSize="13sp" />
+                            <TextView
+                                android:id="@+id/txtProfileEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="email@example.com"
+                                android:textColor="#FFFFFF"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <!-- Địa chỉ -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:text="Địa chỉ:"
+                                android:textColor="#B0A8B9"
+                                android:textSize="13sp" />
+                            <TextView
+                                android:id="@+id/txtProfileAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Hà Nội"
+                                android:textColor="#FFFFFF"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Nút đổi mật khẩu -->
+                <Button
+                    android:id="@+id/btnReaderProfileChangePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:backgroundTint="#2E2C4D"
+                    android:text="ĐỔI MẬT KHẨU TÀI KHOẢN"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <!-- Tiện ích hệ thống độc giả -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="TIỆN ÍCH CỦA BẠN"
+                    android:textColor="#B0A8B9"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <!-- Hộp thư của tôi Card -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardReaderProfileNotifs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="#212030"
+                    app:cardCornerRadius="14dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <View
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginRight="14dp"
+                            android:background="@android:drawable/ic_popup_reminder"
+                            android:backgroundTint="#00B0FF" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hộp Thư Thông Báo"
+                                android:textColor="#FFFFFF"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Xem các nhắc nhở, quá hạn mượn và cập nhật yêu cầu duyệt"
+                                android:textColor="#B0A8B9"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="❯"
+                            android:textColor="#00B0FF"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- PANEL 2: PANEL XEM HỘP THƯ (ẨN MẶC ĐỊNH) -->
+        <LinearLayout
+            android:id="@+id/layoutReaderAccountNotifsView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <include layout="@layout/fragment_reader_notifications" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

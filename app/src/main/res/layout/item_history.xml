@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#2E2C4D"
+    android:layout_marginVertical="4dp"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/txtHistBookTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Python cơ bản"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtHistDates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Mượn: 2026-05-24 | Hạn trả: 2026-06-07"
+        android:textColor="#B0A8B9"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtHistReturnDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đã trả: 2026-05-28"
+            android:textColor="#4CAF50"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/txtHistFine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phạt: 0 VND"
+            android:textColor="#B0A8B9"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

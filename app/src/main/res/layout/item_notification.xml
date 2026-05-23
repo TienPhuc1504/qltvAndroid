@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="4dp"
+    app:cardBackgroundColor="#212030"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <!-- Dot Đỏ chưa đọc -->
+        <View
+            android:id="@+id/viewUnreadDot"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@android:drawable/presence_online"
+            android:backgroundTint="#FF5252" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtNotifTitleRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sách sắp đến hạn trả!"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtNotifBodyRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Cuốn sách Python cơ bản hết hạn trả sau 3 ngày."
+                android:textColor="#B0A8B9"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtNotifDateRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="2026-05-24 02:15"
+                android:textColor="#8A8A9D"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <!-- Xóa thông báo -->
+        <ImageView
+            android:id="@+id/btnDeleteNotifRow"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Delete notif"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="#FF5252" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#151421"
+    android:padding="16dp">
+
+    <!-- Bộ chuyển đổi Tab Yêu Cầu Độc giả -->
+    <LinearLayout
+        android:id="@+id/tabBarLayoutReader"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:background="#212030"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        app:layout_constraintEnd_toStartOf="@id/btnNewCardRequest"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btnTabBorrowReader"
+            style="@style/Widget.Material3.Button.UnelevatedButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Mượn Sách"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:backgroundTint="#6C63FF"
+            app:cornerRadius="6dp" />
+
+        <Button
+            android:id="@+id/btnTabCardReader"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Thẻ Độc Giả"
+            android:textColor="#B0A8B9"
+            android:textStyle="bold"
+            app:cornerRadius="6dp" />
+    </LinearLayout>
+
+    <!-- Nút Yêu cầu in thẻ mới (chỉ hiện khi ở tab thẻ) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNewCardRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:text="Yêu Cầu Thẻ"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:backgroundTint="#4CAF50"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <!-- Danh sách yêu cầu -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMyRequests"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabBarLayoutReader"
+        tools:listitem="@android:layout/simple_list_item_2" />
+
+    <TextView
+        android:id="@+id/txtEmptyMyRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bạn không có yêu cầu nào!"
+        android:textColor="#B0A8B9"
+        android:textSize="15sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_gradient"
+    tools:context=".LoginActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Tiêu đề App -->
+            <ImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginTop="32dp"
+                android:contentDescription="Library Logo"
+                android:src="@android:drawable/ic_menu_myplaces"
+                app:tint="#6C63FF" />
+
+            <TextView
+                android:id="@+id/txtAppName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="THƯ VIỆN SỐ QLTV"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Khám phá tri thức trong tầm tay"
+                android:textColor="#B0A8B9"
+                android:textSize="14sp" />
+
+            <!-- Khung chứa Form -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
+                app:cardBackgroundColor="#212030"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:id="@+id/txtFormTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="18dp"
+                        android:text="ĐĂNG NHẬP HỆ THỐNG"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Ô Username -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLayoutUser"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:hint="Tên đăng nhập"
+                        android:textColorHint="#B0A8B9"
+                        app:boxStrokeColor="#6C63FF"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="#6C63FF">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editUsername"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:textColor="#FFFFFF" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Ô Password -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLayoutPass"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:hint="Mật khẩu"
+                        android:textColorHint="#B0A8B9"
+                        app:boxStrokeColor="#6C63FF"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="#6C63FF"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="#B0A8B9">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:textColor="#FFFFFF" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- PHẦN THÊM CHO ĐĂNG KÝ ĐỘC GIẢ (Ẩn mặc định) -->
+                    <LinearLayout
+                        android:id="@+id/layoutRegisterExtra"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <!-- Ô Họ tên -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:hint="Họ và tên"
+                            android:textColorHint="#B0A8B9"
+                            app:boxStrokeColor="#6C63FF"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:hintTextColor="#6C63FF">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editFullName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textPersonName"
+                                android:textColor="#FFFFFF" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Ô Địa chỉ -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:hint="Địa chỉ"
+                            android:textColorHint="#B0A8B9"
+                            app:boxStrokeColor="#6C63FF"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:hintTextColor="#6C63FF">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"
+                                android:textColor="#FFFFFF" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Ô Số ĐT -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:hint="Số điện thoại"
+                            android:textColorHint="#B0A8B9"
+                            app:boxStrokeColor="#6C63FF"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:hintTextColor="#6C63FF">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editPhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="phone"
+                                android:textColor="#FFFFFF" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Ô Email -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:hint="Email"
+                            android:textColorHint="#B0A8B9"
+                            app:boxStrokeColor="#6C63FF"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:hintTextColor="#6C63FF">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textEmailAddress"
+                                android:textColor="#FFFFFF" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- Nút Đăng nhập -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="12dp"
+                        android:text="ĐĂNG NHẬP"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="#6C63FF"
+                        app:cornerRadius="12dp" />
+
+                    <!-- Nút Đăng ký (Ẩn mặc định) -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnRegister"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="12dp"
+                        android:text="ĐĂNG KÝ NGAY"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        app:backgroundTint="#00B0FF"
+                        app:cornerRadius="12dp" />
+
+                    <!-- Dòng chuyển đổi Form -->
+                    <TextView
+                        android:id="@+id/txtToggleForm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="Chưa có tài khoản? Đăng ký đọc giả"
+                        android:textColor="#B0A8B9"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

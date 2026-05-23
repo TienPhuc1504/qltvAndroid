@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#212030"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:text="CHI TIẾT ĐỘC GIẢ QLTV"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Card Thông tin cá nhân -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#2E2C4D"
+            app:cardCornerRadius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/txtDetName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Họ tên: Trần Thị B"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDetCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Mã độc giả: DG0001"
+                    android:textColor="#B0A8B9"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtDetPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Số điện thoại: 0923456789"
+                    android:textColor="#B0A8B9"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtDetEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Email: ttb@email.com"
+                    android:textColor="#B0A8B9"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtDetAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Địa chỉ: Hồ Chí Minh"
+                    android:textColor="#B0A8B9"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtDetRegDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Ngày đăng ký: 2026-05-24"
+                    android:textColor="#B0A8B9"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card Thông tin thẻ -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#2E2C4D"
+            app:cardCornerRadius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/txtDetCardStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trạng thái thẻ: HOẠT ĐỘNG"
+                    android:textColor="#4CAF50"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDetCardStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Ngày cấp thẻ: 2026-05-24"
+                    android:textColor="#B0A8B9"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtDetCardEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Ngày hết hạn: 2027-05-24"
+                    android:textColor="#B0A8B9"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Các nút hành động -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReaderHistory"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="8dp"
+                android:text="LỊCH SỬ MƯỢN TRẢ"
+                android:textColor="#FFFFFF"
+                app:backgroundTint="#2E2C4D"
+                app:cornerRadius="8dp"
+                app:strokeColor="#6C63FF"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReaderCardRenew"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="8dp"
+                android:text="GIA HẠN THẺ ĐỘC GIẢ"
+                android:textColor="#FFFFFF"
+                app:backgroundTint="#2E2C4D"
+                app:cornerRadius="8dp"
+                app:strokeColor="#6C63FF"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReaderCardPrint"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="8dp"
+                android:text="IN THẺ ĐỘC GIẢ (PREVIEW)"
+                android:textColor="#FFFFFF"
+                app:backgroundTint="#6C63FF"
+                app:cornerRadius="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReaderClose"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="ĐÓNG CỬA SỔ"
+                android:textColor="#B0A8B9" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_staff_books"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="Sách" />
+    <item
+        android:id="@+id/nav_staff_readers"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="Độc Giả" />
+    <item
+        android:id="@+id/nav_staff_borrows"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="Phiếu Mượn" />
+    <item
+        android:id="@+id/nav_staff_requests"
+        android:icon="@android:drawable/ic_menu_send"
+        android:title="Yêu Cầu" />
+    <item
+        android:id="@+id/nav_staff_profile"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="Hồ sơ" />
+</menu>
