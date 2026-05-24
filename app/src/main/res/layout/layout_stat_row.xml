@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="12 sách"
-            android:textColor="#B0A8B9"
+            android:textColor="#C5C5D2"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -36,6 +36,6 @@
         android:layout_marginTop="4dp"
         android:max="100"
         android:progress="35"
-        android:progressTint="#6C63FF" />
+        android:progressTint="#FFFFFF" />
 
 </LinearLayout>

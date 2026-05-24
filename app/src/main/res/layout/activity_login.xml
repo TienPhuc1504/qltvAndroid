@@ -28,7 +28,7 @@
                 android:layout_marginTop="32dp"
                 android:contentDescription="Library Logo"
                 android:src="@android:drawable/ic_menu_myplaces"
-                app:tint="#6C63FF" />
+                app:tint="#FFFFFF" />
 
             <TextView
                 android:id="@+id/txtAppName"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Khám phá tri thức trong tầm tay"
-                android:textColor="#B0A8B9"
+                android:textColor="#C5C5D2"
                 android:textSize="14sp" />
 
             <!-- Khung chứa Form -->
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="32dp"
-                app:cardBackgroundColor="#212030"
+                app:cardBackgroundColor="#181818"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp">
 
@@ -85,10 +85,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:hint="Tên đăng nhập"
-                        android:textColorHint="#B0A8B9"
-                        app:boxStrokeColor="#6C63FF"
+                        android:textColorHint="#C5C5D2"
+                        app:boxStrokeColor="#FFFFFF"
                         app:boxStrokeWidthFocused="2dp"
-                        app:hintTextColor="#6C63FF">
+                        app:hintTextColor="#FFFFFF">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editUsername"
@@ -106,12 +106,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:hint="Mật khẩu"
-                        android:textColorHint="#B0A8B9"
-                        app:boxStrokeColor="#6C63FF"
+                        android:textColorHint="#C5C5D2"
+                        app:boxStrokeColor="#FFFFFF"
                         app:boxStrokeWidthFocused="2dp"
-                        app:hintTextColor="#6C63FF"
+                        app:hintTextColor="#FFFFFF"
                         app:passwordToggleEnabled="true"
-                        app:passwordToggleTint="#B0A8B9">
+                        app:passwordToggleTint="#C5C5D2">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editPassword"
@@ -137,10 +137,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="12dp"
                             android:hint="Họ và tên"
-                            android:textColorHint="#B0A8B9"
-                            app:boxStrokeColor="#6C63FF"
+                            android:textColorHint="#C5C5D2"
+                            app:boxStrokeColor="#FFFFFF"
                             app:boxStrokeWidthFocused="2dp"
-                            app:hintTextColor="#6C63FF">
+                            app:hintTextColor="#FFFFFF">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/editFullName"
@@ -157,10 +157,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="12dp"
                             android:hint="Địa chỉ"
-                            android:textColorHint="#B0A8B9"
-                            app:boxStrokeColor="#6C63FF"
+                            android:textColorHint="#C5C5D2"
+                            app:boxStrokeColor="#FFFFFF"
                             app:boxStrokeWidthFocused="2dp"
-                            app:hintTextColor="#6C63FF">
+                            app:hintTextColor="#FFFFFF">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/editAddress"
@@ -177,10 +177,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="12dp"
                             android:hint="Số điện thoại"
-                            android:textColorHint="#B0A8B9"
-                            app:boxStrokeColor="#6C63FF"
+                            android:textColorHint="#C5C5D2"
+                            app:boxStrokeColor="#FFFFFF"
                             app:boxStrokeWidthFocused="2dp"
-                            app:hintTextColor="#6C63FF">
+                            app:hintTextColor="#FFFFFF">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/editPhone"
@@ -197,10 +197,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="12dp"
                             android:hint="Email"
-                            android:textColorHint="#B0A8B9"
-                            app:boxStrokeColor="#6C63FF"
+                            android:textColorHint="#C5C5D2"
+                            app:boxStrokeColor="#FFFFFF"
                             app:boxStrokeWidthFocused="2dp"
-                            app:hintTextColor="#6C63FF">
+                            app:hintTextColor="#FFFFFF">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/editEmail"
@@ -222,7 +222,7 @@
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:backgroundTint="#6C63FF"
+                        app:backgroundTint="#00B0FF"
                         app:cornerRadius="12dp" />
 
                     <!-- Nút Đăng ký (Ẩn mặc định) -->
@@ -237,7 +237,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:visibility="gone"
-                        app:backgroundTint="#00B0FF"
+                        app:backgroundTint="#B0B0B0"
                         app:cornerRadius="12dp" />
 
                     <!-- Dòng chuyển đổi Form -->
@@ -250,7 +250,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:text="Chưa có tài khoản? Đăng ký đọc giả"
-                        android:textColor="#B0A8B9"
+                        android:textColor="#C5C5D2"
                         android:textSize="13sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

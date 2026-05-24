@@ -185,7 +185,11 @@ public class ReaderManagementFragment extends Fragment {
         txtRegDate.setText("Ngày đăng ký: " + reader.get("ngay_dk"));
 
         if (status != null) {
-            txtCardStatus.setText("Trạng thái thẻ: " + status);
+            String displayStatus = status;
+            if ("HOAT_DONG".equals(status)) displayStatus = "HOẠT ĐỘNG";
+            else if ("KHOA".equals(status)) displayStatus = "BỊ KHÓA";
+            else if ("HET_HAN".equals(status)) displayStatus = "HẾT HẠN";
+            txtCardStatus.setText("Trạng thái thẻ: " + displayStatus);
             txtCardStart.setText("Ngày cấp thẻ: " + reader.get("ngay_cap"));
             txtCardEnd.setText("Ngày hết hạn: " + reader.get("ngay_het_han"));
             if ("HOAT_DONG".equals(status)) {
@@ -368,36 +372,14 @@ public class ReaderManagementFragment extends Fragment {
      */
     private void showAddReaderDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_book, null); // Tận dụng layout nhập
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_reader, null);
         builder.setView(view);
 
-        TextView title = view.findViewById(R.id.txtFormTitle); // textview tiêu đề trong dialog_add_book
-        title.setText("THÊM ĐỘC GIẢ MỚI");
-
-        EditText edtUsername = view.findViewById(R.id.edtTitle); // Tận dụng edtTitle làm username
-        edtUsername.setHint("Tên đăng nhập mới");
-        
-        EditText edtPassword = view.findViewById(R.id.edtAuthor); // Tận dụng edtAuthor làm password
-        edtPassword.setHint("Mật khẩu");
-        edtPassword.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
-
-        // Ẩn spinner/radio và các layout online/giấy không dùng
-        view.findViewById(R.id.spinDialogCat).setVisibility(View.GONE);
-        view.findViewById(R.id.rgType).setVisibility(View.GONE);
-        view.findViewById(R.id.layoutPaperOnly).setVisibility(View.GONE);
-        
-        LinearLayout layoutExtra = view.findViewById(R.id.layoutOnlineOnly);
-        layoutExtra.setVisibility(View.VISIBLE);
-        
-        EditText edtFullName = view.findViewById(R.id.edtUrl); // Tên đầy đủ
-        edtFullName.setHint("Họ và tên");
-        edtFullName.setInputType(android.text.InputType.TYPE_CLASS_TEXT);
-
-        EditText edtAddress = view.findViewById(R.id.edtFormat); // Địa chỉ
-        edtAddress.setHint("Địa chỉ");
-        edtAddress.setText("");
-
-        Button btnSave = view.findViewById(R.id.btnSaveBook);
+        EditText edtUsername = view.findViewById(R.id.edtAddReaderUsername);
+        EditText edtPassword = view.findViewById(R.id.edtAddReaderPassword);
+        EditText edtFullName = view.findViewById(R.id.edtAddReaderFullName);
+        EditText edtAddress = view.findViewById(R.id.edtAddReaderAddress);
+        Button btnSave = view.findViewById(R.id.btnSaveReader);
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -452,7 +434,11 @@ public class ReaderManagementFragment extends Fragment {
             holder.txtCodePhone.setText(code + " | SĐT: " + (phone == null || phone.isEmpty() ? "Chưa có" : phone));
 
             if (status != null) {
-                holder.badgeStatus.setText(status);
+                String displayStatus = status;
+                if ("HOAT_DONG".equals(status)) displayStatus = "HOẠT ĐỘNG";
+                else if ("KHOA".equals(status)) displayStatus = "BỊ KHÓA";
+                else if ("HET_HAN".equals(status)) displayStatus = "HẾT HẠN";
+                holder.badgeStatus.setText(displayStatus);
                 if ("HOAT_DONG".equals(status)) {
                     holder.badgeStatus.setTextColor(0xFF4CAF50);
                     holder.badgeStatus.setBackgroundColor(0x1B4CAF50);

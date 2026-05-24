@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#151421"
+    android:background="#000000"
     android:padding="16dp">
 
     <TextView
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Đọc tất cả"
-        android:textColor="#6C63FF"
+        android:textColor="#FFFFFF"
         android:textSize="13sp"
         android:textStyle="bold"
         android:clickable="true"
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hộp thư thông báo của bạn trống!"
-        android:textColor="#B0A8B9"
+        android:textColor="#C5C5D2"
         android:textSize="15sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

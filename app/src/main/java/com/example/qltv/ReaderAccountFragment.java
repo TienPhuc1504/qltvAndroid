@@ -38,8 +38,12 @@ public class ReaderAccountFragment extends Fragment {
     // View Hồ sơ & Member Card
     private TextView txtCardName, txtCardCode, txtCardExpiry;
     private TextView txtProfileCode, txtProfilePhone, txtProfileEmail, txtProfileAddress;
-    private Button btnChangePassword;
     private CardView cardNotifs;
+
+    // View Avatar & Stats mới
+    private CardView cardReaderAvatar;
+    private ImageView imgReaderAvatar, btnEditReaderProfile;
+    private TextView txtReaderProfileName, txtReaderProfileCodeLabel, txtStatBorrowedBooks;
 
     // View Hộp thư (từ fragment_reader_notifications.xml)
     private TextView btnMarkAllRead;
@@ -55,6 +59,27 @@ public class ReaderAccountFragment extends Fragment {
     private int currentReaderId = 0;
     private List<Map<String, Object>> notifsList = new ArrayList<>();
     private NotifAdapter notifAdapter;
+
+    // 6 mẫu avatar
+    private final int[] avatarColors = new int[]{
+        0xFF757575, // Medium Grey
+        0xFF424242, // Dark Grey
+        0xFFBDBDBD, // Light Grey
+        0xFF4CAF50, // Very Light Grey
+        0xFF212121, // Very Dark Grey
+        0xFFEEEEEE  // White-Grey
+    };
+
+    private final int[] avatarIcons = new int[]{
+        android.R.drawable.ic_menu_compass,
+        android.R.drawable.ic_menu_myplaces,
+        android.R.drawable.ic_menu_gallery,
+        android.R.drawable.ic_menu_today,
+        android.R.drawable.ic_menu_edit,
+        android.R.drawable.ic_menu_help
+    };
+
+    private int tempSelectedAvatarIndex = 1;
 
     @Nullable
     @Override
@@ -85,8 +110,15 @@ public class ReaderAccountFragment extends Fragment {
         txtProfileEmail = view.findViewById(R.id.txtProfileEmail);
         txtProfileAddress = view.findViewById(R.id.txtProfileAddress);
 
-        btnChangePassword = view.findViewById(R.id.btnReaderProfileChangePassword);
         cardNotifs = view.findViewById(R.id.cardReaderProfileNotifs);
+
+        // Ánh xạ Avatar & Stats mới
+        cardReaderAvatar = view.findViewById(R.id.cardReaderAvatar);
+        imgReaderAvatar = view.findViewById(R.id.imgReaderAvatar);
+        btnEditReaderProfile = view.findViewById(R.id.btnEditReaderProfile);
+        txtReaderProfileName = view.findViewById(R.id.txtReaderProfileName);
+        txtReaderProfileCodeLabel = view.findViewById(R.id.txtReaderProfileCodeLabel);
+        txtStatBorrowedBooks = view.findViewById(R.id.txtStatBorrowedBooks);
 
         // 3. Ánh xạ Hộp thư
         btnMarkAllRead = view.findViewById(R.id.btnMarkAllRead);
@@ -122,8 +154,9 @@ public class ReaderAccountFragment extends Fragment {
             loadNotifications();
         });
 
-        // Click đổi mật khẩu cá nhân độc giả
-        btnChangePassword.setOnClickListener(v -> showChangePasswordDialog());
+        // Click sửa hồ sơ hoặc chạm vào avatar
+        btnEditReaderProfile.setOnClickListener(v -> showEditProfileDialog());
+        cardReaderAvatar.setOnClickListener(v -> showEditProfileDialog());
 
         // Đọc tất cả thông báo
         btnMarkAllRead.setOnClickListener(v -> markAllRead());
@@ -164,6 +197,7 @@ public class ReaderAccountFragment extends Fragment {
     private void loadUserProfile() {
         executorService.execute(() -> {
             Map<String, Object> profile = userRepository.getUserProfile(currentReaderId);
+            int borrowedCount = userRepository.getBorrowedBooksCount(currentReaderId);
             if (isAdded() && profile != null) {
                 requireActivity().runOnUiThread(() -> {
                     String fullName = (String) profile.get("ho_ten");
@@ -172,7 +206,6 @@ public class ReaderAccountFragment extends Fragment {
                     String phoneStr = (String) profile.get("so_dt");
                     String addressStr = (String) profile.get("dia_chi");
                     String expiry = (String) profile.get("ngay_het_han");
-                    String user = sharedPreferences.getString("username", "user");
 
                     txtCardName.setText(fullName.toUpperCase());
                     txtCardCode.setText("MÃ ĐG: " + (code != null ? code : "Đang chờ cấp"));
@@ -182,9 +215,117 @@ public class ReaderAccountFragment extends Fragment {
                     txtProfilePhone.setText(phoneStr == null || phoneStr.isEmpty() ? "Chưa có" : phoneStr);
                     txtProfileEmail.setText(emailStr == null || emailStr.isEmpty() ? "Chưa có" : emailStr);
                     txtProfileAddress.setText(addressStr == null || addressStr.isEmpty() ? "Chưa có" : addressStr);
+
+                    // Tải Avatar từ SharedPreferences
+                    int avatarIdx = sharedPreferences.getInt("avatar_index_reader_" + currentReaderId, 1);
+                    cardReaderAvatar.setCardBackgroundColor(avatarColors[avatarIdx]);
+                    imgReaderAvatar.setImageResource(avatarIcons[avatarIdx]);
+
+                    // Gán tên, mã và chỉ số
+                    txtReaderProfileName.setText(fullName);
+                    txtReaderProfileCodeLabel.setText(code != null ? code : "Đang chờ cấp");
+                    txtStatBorrowedBooks.setText(String.valueOf(borrowedCount));
                 });
             }
         });
+    }
+
+    private void showEditProfileDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_edit_reader_profile, null);
+        builder.setView(dialogView);
+
+        EditText edtPhone = dialogView.findViewById(R.id.edtEditProfilePhone);
+        EditText edtEmail = dialogView.findViewById(R.id.edtEditProfileEmail);
+        EditText edtAddress = dialogView.findViewById(R.id.edtEditProfileAddress);
+        Button btnChangePass = dialogView.findViewById(R.id.btnEditProfileChangePassword);
+        Button btnCancel = dialogView.findViewById(R.id.btnEditProfileCancel);
+        Button btnSave = dialogView.findViewById(R.id.btnEditProfileSave);
+
+        // Nạp dữ liệu hiện tại
+        edtPhone.setText(txtProfilePhone.getText().toString().equals("Chưa có") ? "" : txtProfilePhone.getText().toString());
+        edtEmail.setText(txtProfileEmail.getText().toString().equals("Chưa có") ? "" : txtProfileEmail.getText().toString());
+        edtAddress.setText(txtProfileAddress.getText().toString().equals("Chưa có") ? "" : txtProfileAddress.getText().toString());
+
+        // Avatar selector
+        final CardView[] avatarBtns = new CardView[6];
+        avatarBtns[0] = dialogView.findViewById(R.id.btnAvatar0);
+        avatarBtns[1] = dialogView.findViewById(R.id.btnAvatar1);
+        avatarBtns[2] = dialogView.findViewById(R.id.btnAvatar2);
+        avatarBtns[3] = dialogView.findViewById(R.id.btnAvatar3);
+        avatarBtns[4] = dialogView.findViewById(R.id.btnAvatar4);
+        avatarBtns[5] = dialogView.findViewById(R.id.btnAvatar5);
+
+        // Lấy index hiện tại
+        tempSelectedAvatarIndex = sharedPreferences.getInt("avatar_index_reader_" + currentReaderId, 1);
+        
+        // Hàm highlight avatar được chọn
+        highlightSelectedAvatar(avatarBtns, tempSelectedAvatarIndex);
+
+        // Thêm click listener cho các avatar mẫu
+        for (int i = 0; i < 6; i++) {
+            final int index = i;
+            avatarBtns[i].setOnClickListener(v -> {
+                tempSelectedAvatarIndex = index;
+                highlightSelectedAvatar(avatarBtns, tempSelectedAvatarIndex);
+            });
+        }
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Nút Hủy
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+
+        // Nút Đổi mật khẩu tài khoản
+        btnChangePass.setOnClickListener(v -> {
+            dialog.dismiss();
+            showChangePasswordDialog();
+        });
+
+        // Nút Lưu thay đổi
+        btnSave.setOnClickListener(v -> {
+            String newPhone = edtPhone.getText().toString().trim();
+            String newEmail = edtEmail.getText().toString().trim();
+            String newAddress = edtAddress.getText().toString().trim();
+            String currentName = txtReaderProfileName.getText().toString(); // giữ nguyên tên
+
+            executorService.execute(() -> {
+                boolean success = userRepository.updateProfile(currentReaderId, currentName, newAddress, newPhone, newEmail);
+                if (success) {
+                    // Lưu avatar vào SharedPreferences
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("avatar_index_reader_" + currentReaderId, tempSelectedAvatarIndex);
+                    editor.apply();
+
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            Toast.makeText(requireContext(), "Cập nhật hồ sơ thành công!", Toast.LENGTH_SHORT).show();
+                            loadUserProfile();
+                            dialog.dismiss();
+                        });
+                    }
+                } else {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            Toast.makeText(requireContext(), "Cập nhật hồ sơ thất bại!", Toast.LENGTH_SHORT).show();
+                        });
+                    }
+                }
+            });
+        });
+    }
+
+    private void highlightSelectedAvatar(CardView[] avatarBtns, int selectedIndex) {
+        for (int i = 0; i < avatarBtns.length; i++) {
+            if (i == selectedIndex) {
+                avatarBtns[i].setAlpha(1.0f);
+                avatarBtns[i].setCardElevation(8f);
+            } else {
+                avatarBtns[i].setAlpha(0.4f);
+                avatarBtns[i].setCardElevation(0f);
+            }
+        }
     }
 
     private void showChangePasswordDialog() {

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="4dp"
     android:layout_marginVertical="6dp"
-    app:cardBackgroundColor="#212030"
+    app:cardBackgroundColor="#181818"
     app:cardCornerRadius="14dp"
     app:cardElevation="2dp">
 
@@ -34,11 +34,11 @@
                 android:id="@+id/badgeMyCardReqStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#2E2C4D"
+                android:background="#2D2D2D"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
                 android:text="CHO_DUYET"
-                android:textColor="#FF9800"
+                android:textColor="#CCCCCC"
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -47,14 +47,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginVertical="8dp"
-            android:background="#2E2C4D" />
+            android:background="#2D2D2D" />
 
         <TextView
             android:id="@+id/txtMyCardReqDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ngày yêu cầu: 2026-05-24 02:10"
-            android:textColor="#B0A8B9"
+            android:textColor="#C5C5D2"
             android:textSize="12sp" />
 
         <TextView
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:text="Tình trạng nhận: Đã nhận thẻ tại quầy"
-            android:textColor="#4CAF50"
+            android:textColor="#E0E0E0"
             android:textSize="12sp"
             android:textStyle="bold"
             android:visibility="gone" />
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:text="Lý do từ chối: -"
-            android:textColor="#FF5252"
+            android:textColor="#E0E0E0"
             android:textSize="12sp"
             android:textStyle="italic"
             android:visibility="gone" />

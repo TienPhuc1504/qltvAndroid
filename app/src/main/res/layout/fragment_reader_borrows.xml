@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#151421"
+    android:background="#000000"
     android:padding="16dp">
 
     <TextView
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:text="Danh sách sách đang mượn và lịch sử hoàn trả"
-        android:textColor="#B0A8B9"
+        android:textColor="#C5C5D2"
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/txtMyBorrowsTitle"
         app:layout_constraintStart_toStartOf="parent" />
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bạn chưa từng mượn cuốn sách nào!"
-        android:textColor="#B0A8B9"
+        android:textColor="#C5C5D2"
         android:textSize="15sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#151421"
+    android:background="#000000"
     tools:context=".MainActivity">
 
     <!-- Container chứa các Fragment thay đổi -->
@@ -23,7 +23,7 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#212030"
+        android:background="#181818"
         app:itemIconTint="@color/nav_item_color"
         app:itemTextColor="@color/nav_item_color"
         app:labelVisibilityMode="labeled"

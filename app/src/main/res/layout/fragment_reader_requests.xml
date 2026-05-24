@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#151421"
+    android:background="#000000"
     android:padding="16dp">
 
     <!-- Bộ chuyển đổi Tab Yêu Cầu Độc giả -->
@@ -12,7 +12,7 @@
         android:id="@+id/tabBarLayoutReader"
         android:layout_width="0dp"
         android:layout_height="52dp"
-        android:background="#212030"
+        android:background="#181818"
         android:orientation="horizontal"
         android:padding="4dp"
         app:layout_constraintEnd_toStartOf="@id/btnNewCardRequest"
@@ -28,7 +28,7 @@
             android:text="Mượn Sách"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            app:backgroundTint="#6C63FF"
+            app:backgroundTint="#00B0FF"
             app:cornerRadius="6dp" />
 
         <Button
@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Thẻ Độc Giả"
-            android:textColor="#B0A8B9"
+            android:textColor="#C5C5D2"
             android:textStyle="bold"
             app:cornerRadius="6dp" />
     </LinearLayout>
@@ -54,7 +54,7 @@
         android:textSize="11sp"
         android:textStyle="bold"
         android:visibility="gone"
-        app:backgroundTint="#4CAF50"
+        app:backgroundTint="#00B0FF"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bạn không có yêu cầu nào!"
-        android:textColor="#B0A8B9"
+        android:textColor="#C5C5D2"
         android:textSize="15sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

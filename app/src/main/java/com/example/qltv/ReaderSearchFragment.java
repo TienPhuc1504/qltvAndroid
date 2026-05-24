@@ -227,11 +227,11 @@ public class ReaderSearchFragment extends Fragment {
                 if (soQuyenCoSan > 0) {
                     holder.txtAvailabilityReader.setTextColor(0xFF4CAF50);
                     holder.btnBorrowActionReader.setEnabled(true);
-                    holder.btnBorrowActionReader.setBackgroundColor(0xFF6C63FF);
+                    holder.btnBorrowActionReader.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF00B0FF));
                 } else {
                     holder.txtAvailabilityReader.setTextColor(0xFFFF5252);
                     holder.btnBorrowActionReader.setEnabled(false);
-                    holder.btnBorrowActionReader.setBackgroundColor(0xFF2E2C4D);
+                    holder.btnBorrowActionReader.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF2E2C4D));
                 }
             } else {
                 holder.txtAvailabilityReader.setText("Đọc trực tuyến");

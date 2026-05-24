@@ -77,18 +77,18 @@ public class ReaderRequestsFragment extends Fragment {
     private void switchTab(boolean isBorrow) {
         isBorrowTab = isBorrow;
         if (isBorrowTab) {
-            btnTabBorrow.setBackgroundColor(0xFF6C63FF);
+            btnTabBorrow.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF00B0FF));
             btnTabBorrow.setTextColor(0xFFFFFFFF);
-            btnTabCard.setBackgroundColor(0x00000000);
-            btnTabCard.setTextColor(0xFFB0A8B9);
+            btnTabCard.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0x00000000));
+            btnTabCard.setTextColor(0xFFC5C5D2);
             btnNewCardRequest.setVisibility(View.GONE);
             recyclerViewRequests.setAdapter(borrowAdapter);
             loadBorrowRequests();
         } else {
-            btnTabCard.setBackgroundColor(0xFF6C63FF);
+            btnTabCard.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF00B0FF));
             btnTabCard.setTextColor(0xFFFFFFFF);
-            btnTabBorrow.setBackgroundColor(0x00000000);
-            btnTabBorrow.setTextColor(0xFFB0A8B9);
+            btnTabBorrow.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0x00000000));
+            btnTabBorrow.setTextColor(0xFFC5C5D2);
             btnNewCardRequest.setVisibility(View.VISIBLE);
             recyclerViewRequests.setAdapter(cardAdapter);
             loadCardRequests();
@@ -203,7 +203,19 @@ public class ReaderRequestsFragment extends Fragment {
             holder.txtDays.setText("Đề xuất: " + proposedDays + " ngày | Ghi chú: " + (r.get("ghi_chu") != null ? r.get("ghi_chu") : "Không"));
             holder.txtDate.setText("Ngày gửi: " + reqDate);
 
-            holder.badgeStatus.setText(status);
+            String displayStatus = status;
+            if ("CHO_DUYET".equals(status)) {
+                displayStatus = "CHỜ DUYỆT";
+            } else if ("CHO_LAY_SACH".equals(status)) {
+                displayStatus = "CHỜ LẤY SÁCH";
+            } else if ("DA_LAY".equals(status)) {
+                displayStatus = "ĐÃ LẤY";
+            } else if ("TU_CHOI".equals(status)) {
+                displayStatus = "BỊ TỪ CHỐI";
+            } else if ("DA_HUY".equals(status)) {
+                displayStatus = "ĐÃ HỦY";
+            }
+            holder.badgeStatus.setText(displayStatus);
             holder.txtReason.setVisibility(View.GONE);
 
             // Bật tắt nút hủy
@@ -274,7 +286,19 @@ public class ReaderRequestsFragment extends Fragment {
             String reason = (String) r.get("ly_do_tu_choi");
 
             holder.txtDate.setText("Ngày yêu cầu: " + date);
-            holder.badgeStatus.setText(status);
+            String displayStatus = status;
+            if ("CHO_DUYET".equals(status)) {
+                displayStatus = "CHỜ DUYỆT";
+            } else if ("DANG_XU_LY".equals(status)) {
+                displayStatus = "ĐANG XỬ LÝ";
+            } else if ("DA_IN".equals(status)) {
+                displayStatus = "ĐÃ IN";
+            } else if ("TU_CHOI".equals(status)) {
+                displayStatus = "BỊ TỪ CHỐI";
+            } else if ("DA_HUY".equals(status)) {
+                displayStatus = "ĐÃ HỦY";
+            }
+            holder.badgeStatus.setText(displayStatus);
             
             holder.txtPickup.setVisibility(View.GONE);
             holder.txtReason.setVisibility(View.GONE);

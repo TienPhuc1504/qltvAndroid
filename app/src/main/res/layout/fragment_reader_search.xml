@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#151421"
+    android:background="#000000"
     android:padding="16dp">
 
     <!-- Tìm kiếm -->
@@ -14,15 +14,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Tìm kiếm tựa sách, tác giả..."
-        android:textColorHint="#B0A8B9"
-        app:boxStrokeColor="#6C63FF"
+        android:textColorHint="#C5C5D2"
+        app:boxStrokeColor="#FFFFFF"
         app:boxStrokeWidthFocused="2dp"
-        app:hintTextColor="#6C63FF"
+        app:hintTextColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@id/spinnerCatReader"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@android:drawable/ic_menu_search"
-        app:startIconTint="#B0A8B9">
+        app:startIconTint="#C5C5D2">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editSearchReaderCatalog"
@@ -40,7 +40,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:background="@android:drawable/btn_dropdown"
-        android:backgroundTint="#212030"
+        android:backgroundTint="#181818"
         app:layout_constraintBottom_toBottomOf="@id/searchLayoutReaderCatalog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/searchLayoutReaderCatalog" />
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Không tìm thấy cuốn sách nào phù hợp!"
-        android:textColor="#B0A8B9"
+        android:textColor="#C5C5D2"
         android:textSize="15sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

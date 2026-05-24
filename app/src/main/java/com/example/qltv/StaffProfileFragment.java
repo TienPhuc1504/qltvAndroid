@@ -371,13 +371,13 @@ public class StaffProfileFragment extends Fragment {
                             txtCount.setText(borrowCount + " lượt");
 
                             if (rank == 1) {
-                                txtRank.setTextColor(0xFFFFD700);
+                                txtRank.setTextColor(0xFF4CAF50);
                             } else if (rank == 2) {
-                                txtRank.setTextColor(0xFFC0C0C0);
+                                txtRank.setTextColor(0xFF00B0FF);
                             } else if (rank == 3) {
-                                txtRank.setTextColor(0xFFCD7F32);
+                                txtRank.setTextColor(0xFF8E8E93);
                             } else {
-                                txtRank.setTextColor(0xFFB0A8B9);
+                                txtRank.setTextColor(0xFF8E8E93);
                             }
 
                             layoutTopBooksContainer.addView(bookView);

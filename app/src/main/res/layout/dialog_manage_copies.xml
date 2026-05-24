@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#212030"
+    android:background="#181818"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="12dp"
-        android:background="#2E2C4D" />
+        android:background="#2D2D2D" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,10 +51,10 @@
             android:layout_weight="1"
             android:layout_marginEnd="6dp"
             android:hint="Vị trí kệ"
-            android:textColorHint="#B0A8B9"
-            app:boxStrokeColor="#6C63FF"
+            android:textColorHint="#C5C5D2"
+            app:boxStrokeColor="#FFFFFF"
             app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="#6C63FF">
+            app:hintTextColor="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtNewCopyViTri"
@@ -70,10 +70,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
             android:hint="Ghi chú"
-            android:textColorHint="#B0A8B9"
-            app:boxStrokeColor="#6C63FF"
+            android:textColorHint="#C5C5D2"
+            app:boxStrokeColor="#FFFFFF"
             app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="#6C63FF">
+            app:hintTextColor="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtNewCopyGhiChu"
@@ -92,7 +92,7 @@
         android:text="THÊM BẢN SAO VẬT LÝ"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:backgroundTint="#6C63FF"
+        app:backgroundTint="#FFFFFF"
         app:cornerRadius="10dp" />
 
 </LinearLayout>

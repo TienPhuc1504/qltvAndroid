@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#2E2C4D"
+    android:background="#2D2D2D"
     android:layout_marginVertical="4dp"
     android:orientation="horizontal"
     android:gravity="center_vertical"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:text="Vị trí: Kệ A1 | Mới nhập"
-            android:textColor="#B0A8B9"
+            android:textColor="#C5C5D2"
             android:textSize="11sp" />
     </LinearLayout>
 
@@ -53,7 +53,7 @@
         android:contentDescription="Edit copy"
         android:padding="6dp"
         android:src="@android:drawable/ic_menu_edit"
-        app:tint="#00B0FF" />
+        app:tint="#B0B0B0" />
 
     <!-- Delete copy -->
     <ImageView
@@ -65,6 +65,6 @@
         android:contentDescription="Delete copy"
         android:padding="6dp"
         android:src="@android:drawable/ic_menu_delete"
-        app:tint="#FF5252" />
+        app:tint="#E0E0E0" />
 
 </LinearLayout>

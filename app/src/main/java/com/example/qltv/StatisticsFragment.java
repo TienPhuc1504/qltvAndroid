@@ -113,13 +113,13 @@ public class StatisticsFragment extends Fragment {
 
                             // Đổi màu top 3
                             if (rank == 1) {
-                                txtRank.setTextColor(0xFFFFD700); // Gold
+                                txtRank.setTextColor(0xFF4CAF50); // Gold
                             } else if (rank == 2) {
-                                txtRank.setTextColor(0xFFC0C0C0); // Silver
+                                txtRank.setTextColor(0xFF00B0FF); // Silver
                             } else if (rank == 3) {
-                                txtRank.setTextColor(0xFFCD7F32); // Bronze
+                                txtRank.setTextColor(0xFF8E8E93); // Bronze
                             } else {
-                                txtRank.setTextColor(0xFFB0A8B9);
+                                txtRank.setTextColor(0xFF8E8E93);
                             }
 
                             layoutTopBooksContainer.addView(bookView);

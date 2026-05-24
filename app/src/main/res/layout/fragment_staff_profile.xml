@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#151421"
+    android:background="#000000"
     android:orientation="vertical">
 
     <!-- THANH TIÊU ĐỀ ĐỘNG (HEADER BAR) -->
@@ -11,7 +11,7 @@
         android:id="@+id/layoutProfileHeader"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#212030"
+        android:background="#181818"
         android:paddingHorizontal="16dp">
 
         <!-- Nút quay lại (chỉ hiển thị khi đang xem Thống kê hoặc Quản lý nhân viên) -->
@@ -78,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="#212030"
+                    app:cardBackgroundColor="#181818"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="4dp">
 
@@ -95,7 +95,7 @@
                             android:layout_width="72dp"
                             android:layout_height="72dp"
                             android:background="@android:drawable/presence_online"
-                            android:backgroundTint="#00B0FF"
+                            android:backgroundTint="#B0B0B0"
                             android:gravity="center"
                             android:text="A"
                             android:textColor="#FFFFFF"
@@ -118,7 +118,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="\@username"
-                            android:textColor="#B0A8B9"
+                            android:textColor="#C5C5D2"
                             android:textSize="13sp" />
 
                         <!-- Badge Vai trò -->
@@ -127,11 +127,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:background="#2E2C4D"
+                            android:background="#2D2D2D"
                             android:paddingHorizontal="12dp"
                             android:paddingVertical="4dp"
                             android:text="ADMIN"
-                            android:textColor="#00B0FF"
+                            android:textColor="#B0B0B0"
                             android:textSize="11sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -142,7 +142,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="#212030"
+                    app:cardBackgroundColor="#181818"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="2dp">
 
@@ -156,7 +156,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Thông tin liên lạc"
-                            android:textColor="#00B0FF"
+                            android:textColor="#B0B0B0"
                             android:textSize="13sp"
                             android:textStyle="bold" />
 
@@ -170,7 +170,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:text="Mã nhân viên:"
-                                android:textColor="#B0A8B9"
+                                android:textColor="#C5C5D2"
                                 android:textSize="13sp" />
                             <TextView
                                 android:id="@+id/txtStaffProfileCode"
@@ -192,7 +192,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:text="Số điện thoại:"
-                                android:textColor="#B0A8B9"
+                                android:textColor="#C5C5D2"
                                 android:textSize="13sp" />
                             <TextView
                                 android:id="@+id/txtStaffProfilePhone"
@@ -213,7 +213,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:text="Email:"
-                                android:textColor="#B0A8B9"
+                                android:textColor="#C5C5D2"
                                 android:textSize="13sp" />
                             <TextView
                                 android:id="@+id/txtStaffProfileEmail"
@@ -234,7 +234,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:text="Địa chỉ:"
-                                android:textColor="#B0A8B9"
+                                android:textColor="#C5C5D2"
                                 android:textSize="13sp" />
                             <TextView
                                 android:id="@+id/txtStaffProfileAddress"
@@ -253,7 +253,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
-                    android:backgroundTint="#2E2C4D"
+                    android:backgroundTint="#2D2D2D"
                     android:text="ĐỔI MẬT KHẨU TÀI KHOẢN"
                     android:textColor="#FFFFFF"
                     android:textSize="13sp"
@@ -265,7 +265,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:text="TIỆN ÍCH HỆ THỐNG"
-                    android:textColor="#B0A8B9"
+                    android:textColor="#C5C5D2"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -278,7 +278,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cardBackgroundColor="#212030"
+                    app:cardBackgroundColor="#181818"
                     app:cardCornerRadius="14dp">
 
                     <LinearLayout
@@ -314,7 +314,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:text="Xem thống kê tổng quan thư viện và lượt mượn trả"
-                                android:textColor="#B0A8B9"
+                                android:textColor="#C5C5D2"
                                 android:textSize="11sp" />
                         </LinearLayout>
 
@@ -322,7 +322,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="❯"
-                            android:textColor="#00B0FF"
+                            android:textColor="#B0B0B0"
                             android:textSize="16sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -336,7 +336,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cardBackgroundColor="#212030"
+                    app:cardBackgroundColor="#181818"
                     app:cardCornerRadius="14dp">
 
                     <LinearLayout
@@ -351,7 +351,7 @@
                             android:layout_height="44dp"
                             android:layout_marginRight="14dp"
                             android:background="@android:drawable/ic_menu_myplaces"
-                            android:backgroundTint="#4CAF50" />
+                            android:backgroundTint="#E0E0E0" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -372,7 +372,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:text="Thêm, sửa và xóa thông tin nhân viên thư viện"
-                                android:textColor="#B0A8B9"
+                                android:textColor="#C5C5D2"
                                 android:textSize="11sp" />
                         </LinearLayout>
 
@@ -380,7 +380,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="❯"
-                            android:textColor="#00B0FF"
+                            android:textColor="#B0B0B0"
                             android:textSize="16sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -411,9 +411,9 @@
                 android:id="@+id/editSearchStaff"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="#212030"
+                android:background="#181818"
                 android:hint="Tìm kiếm nhân viên..."
-                android:textColorHint="#B0A8B9"
+                android:textColorHint="#C5C5D2"
                 android:textColor="#FFFFFF"
                 android:paddingHorizontal="16dp"
                 android:textSize="14sp"
@@ -425,7 +425,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="Chưa có nhân viên nào!"
-                android:textColor="#B0A8B9"
+                android:textColor="#C5C5D2"
                 android:textSize="14sp"
                 android:visibility="gone" />
 
@@ -445,7 +445,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_margin="16dp"
                 android:src="@android:drawable/ic_input_add"
-                android:backgroundTint="#00B0FF"
+                app:backgroundTint="#00B0FF"
                 app:tint="#FFFFFF" />
         </RelativeLayout>
     </FrameLayout>

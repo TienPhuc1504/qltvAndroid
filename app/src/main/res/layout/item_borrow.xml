@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="4dp"
     android:layout_marginVertical="6dp"
-    app:cardBackgroundColor="#212030"
+    app:cardBackgroundColor="#181818"
     app:cardCornerRadius="14dp"
     app:cardElevation="3dp">
 
@@ -36,11 +36,11 @@
                 android:id="@+id/badgeBorrowStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#2E2C4D"
+                android:background="#2D2D2D"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
                 android:text="DANG_MUON"
-                android:textColor="#FF9800"
+                android:textColor="#CCCCCC"
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginVertical="8dp"
-            android:background="#2E2C4D" />
+            android:background="#2D2D2D" />
 
         <!-- Sách -->
         <TextView
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:text="Bản sao: S0003-Q002"
-            android:textColor="#B0A8B9"
+            android:textColor="#C5C5D2"
             android:textSize="12sp" />
 
         <TextView
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Mượn: 2026-05-24 | Hạn trả: 2026-06-07"
-            android:textColor="#B0A8B9"
+            android:textColor="#C5C5D2"
             android:textSize="12sp" />
 
         <!-- Tiền phạt quá hạn -->
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phạt quá hạn: 15,000 VND"
-                android:textColor="#FF5252"
+                android:textColor="#E0E0E0"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 

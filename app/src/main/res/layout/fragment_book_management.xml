@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#151421"
+    android:background="#000000"
     android:padding="16dp">
 
     <!-- Ô Tìm kiếm sách -->
@@ -14,15 +14,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Tìm kiếm sách hoặc tác giả..."
-        android:textColorHint="#B0A8B9"
-        app:boxStrokeColor="#6C63FF"
+        android:textColorHint="#C5C5D2"
+        app:boxStrokeColor="#FFFFFF"
         app:boxStrokeWidthFocused="2dp"
-        app:hintTextColor="#6C63FF"
+        app:hintTextColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@id/spinnerCategory"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@android:drawable/ic_menu_search"
-        app:startIconTint="#B0A8B9">
+        app:startIconTint="#C5C5D2">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editSearch"
@@ -40,7 +40,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:background="@android:drawable/btn_dropdown"
-        android:backgroundTint="#212030"
+        android:backgroundTint="#181818"
         app:layout_constraintBottom_toBottomOf="@id/searchLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/searchLayout" />
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Không tìm thấy sách nào phù hợp!"
-        android:textColor="#B0A8B9"
+        android:textColor="#C5C5D2"
         android:textSize="15sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,7 +79,7 @@
         android:layout_margin="16dp"
         android:contentDescription="Add book"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="#6C63FF"
+        app:backgroundTint="#00B0FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="#FFFFFF" />

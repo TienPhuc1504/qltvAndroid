@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#212030"
+    android:background="#181818"
     android:padding="20dp">
 
     <LinearLayout
@@ -28,10 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:hint="Tiêu đề sách"
-            android:textColorHint="#B0A8B9"
-            app:boxStrokeColor="#6C63FF"
+            android:textColorHint="#C5C5D2"
+            app:boxStrokeColor="#FFFFFF"
             app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="#6C63FF">
+            app:hintTextColor="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtTitleEdit"
@@ -47,10 +47,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:hint="Tác giả"
-            android:textColorHint="#B0A8B9"
-            app:boxStrokeColor="#6C63FF"
+            android:textColorHint="#C5C5D2"
+            app:boxStrokeColor="#FFFFFF"
             app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="#6C63FF">
+            app:hintTextColor="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtAuthorEdit"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="Thể loại"
-            android:textColor="#B0A8B9"
+            android:textColor="#C5C5D2"
             android:textSize="12sp" />
 
         <Spinner
@@ -74,7 +74,7 @@
             android:layout_height="50dp"
             android:layout_marginBottom="12dp"
             android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#2E2C4D" />
+            android:backgroundTint="#2D2D2D" />
 
         <!-- Trạng thái đầu sách giấy (hàng loạt) -->
         <TextView
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="Trạng thái (áp dụng bản sao chưa mượn)"
-            android:textColor="#B0A8B9"
+            android:textColor="#C5C5D2"
             android:textSize="12sp" />
 
         <Spinner
@@ -91,7 +91,7 @@
             android:layout_height="50dp"
             android:layout_marginBottom="12dp"
             android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#2E2C4D" />
+            android:backgroundTint="#2D2D2D" />
 
         <!-- Phần cấu hình Sách Online -->
         <LinearLayout
@@ -108,10 +108,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="URL tài liệu"
-                android:textColorHint="#B0A8B9"
-                app:boxStrokeColor="#6C63FF"
+                android:textColorHint="#C5C5D2"
+                app:boxStrokeColor="#FFFFFF"
                 app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="#6C63FF">
+                app:hintTextColor="#FFFFFF">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtUrlEdit"
@@ -128,10 +128,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Định dạng"
-                android:textColorHint="#B0A8B9"
-                app:boxStrokeColor="#6C63FF"
+                android:textColorHint="#C5C5D2"
+                app:boxStrokeColor="#FFFFFF"
                 app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="#6C63FF">
+                app:hintTextColor="#FFFFFF">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtFormatEdit"
@@ -149,7 +149,7 @@
             android:text="LƯU THAY ĐỔI"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            app:backgroundTint="#00B0FF"
+            app:backgroundTint="#B0B0B0"
             app:cornerRadius="10dp" />
 
     </LinearLayout>

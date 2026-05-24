@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#212030"
+    android:background="#181818"
     android:padding="20dp">
 
     <LinearLayout
@@ -29,10 +29,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:hint="Số ngày đề xuất mượn (1 - 30)"
-            android:textColorHint="#B0A8B9"
-            app:boxStrokeColor="#6C63FF"
+            android:textColorHint="#C5C5D2"
+            app:boxStrokeColor="#FFFFFF"
             app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="#6C63FF">
+            app:hintTextColor="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtBorrowDialogDays"
@@ -50,10 +50,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:hint="Ghi chú thêm"
-            android:textColorHint="#B0A8B9"
-            app:boxStrokeColor="#6C63FF"
+            android:textColorHint="#C5C5D2"
+            app:boxStrokeColor="#FFFFFF"
             app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="#6C63FF">
+            app:hintTextColor="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtBorrowDialogNotes"
@@ -70,7 +70,7 @@
             android:text="GỬI YÊU CẦU DUYỆT"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            app:backgroundTint="#6C63FF"
+            app:backgroundTint="#FFFFFF"
             app:cornerRadius="10dp" />
     </LinearLayout>
 </ScrollView>

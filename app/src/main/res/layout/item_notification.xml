@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="4dp"
     android:layout_marginVertical="4dp"
-    app:cardBackgroundColor="#212030"
+    app:cardBackgroundColor="#181818"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
@@ -22,7 +22,7 @@
             android:layout_height="8dp"
             android:layout_marginEnd="8dp"
             android:background="@android:drawable/presence_online"
-            android:backgroundTint="#FF5252" />
+            android:backgroundTint="#E0E0E0" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="Cuốn sách Python cơ bản hết hạn trả sau 3 ngày."
-                android:textColor="#B0A8B9"
+                android:textColor="#C5C5D2"
                 android:textSize="12sp" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="2026-05-24 02:15"
-                android:textColor="#8A8A9D"
+                android:textColor="#BFBFCF"
                 android:textSize="10sp" />
         </LinearLayout>
 
@@ -68,7 +68,7 @@
             android:contentDescription="Delete notif"
             android:padding="6dp"
             android:src="@android:drawable/ic_menu_close_clear_cancel"
-            app:tint="#FF5252" />
+            app:tint="#E0E0E0" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

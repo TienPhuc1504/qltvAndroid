@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#212030"
+    android:background="#181818"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -24,10 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:hint="Vị trí kệ mới"
-        android:textColorHint="#B0A8B9"
-        app:boxStrokeColor="#6C63FF"
+        android:textColorHint="#C5C5D2"
+        app:boxStrokeColor="#FFFFFF"
         app:boxStrokeWidthFocused="2dp"
-        app:hintTextColor="#6C63FF">
+        app:hintTextColor="#FFFFFF">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtEditCopyViTri"
@@ -43,10 +43,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:hint="Ghi chú bản sao"
-        android:textColorHint="#B0A8B9"
-        app:boxStrokeColor="#6C63FF"
+        android:textColorHint="#C5C5D2"
+        app:boxStrokeColor="#FFFFFF"
         app:boxStrokeWidthFocused="2dp"
-        app:hintTextColor="#6C63FF">
+        app:hintTextColor="#FFFFFF">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtEditCopyGhiChu"
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:text="Trạng thái bản sao"
-        android:textColor="#B0A8B9"
+        android:textColor="#C5C5D2"
         android:textSize="12sp" />
 
     <Spinner
@@ -70,7 +70,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:background="@android:drawable/btn_dropdown"
-        android:backgroundTint="#2E2C4D" />
+        android:backgroundTint="#2D2D2D" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSaveCopyEdit"
@@ -79,7 +79,7 @@
         android:text="LƯU THAY ĐỔI"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:backgroundTint="#00B0FF"
+        app:backgroundTint="#B0B0B0"
         app:cornerRadius="10dp" />
 
 </LinearLayout>

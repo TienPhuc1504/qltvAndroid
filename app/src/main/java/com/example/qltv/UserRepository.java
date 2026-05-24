@@ -279,4 +279,21 @@ public class UserRepository {
         }
         return profile;
     }
+
+    /**
+     * Lấy tổng số sách đã mượn của độc giả
+     */
+    public int getBorrowedBooksCount(int ma_nd) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String sql = "SELECT COUNT(*) FROM PHIEU_MUON_TRA WHERE ma_nd_doc_gia = ?";
+        try (Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(ma_nd)})) {
+            if (cursor.moveToFirst()) {
+                return cursor.getInt(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }
+
