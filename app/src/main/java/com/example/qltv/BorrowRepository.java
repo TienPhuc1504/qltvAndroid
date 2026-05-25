@@ -191,7 +191,7 @@ public class BorrowRepository {
         }
 
         Integer ma_quyen = null;
-        if ("SACH_GIAY".equals(loai_sach)) {
+        if ("SACH_GIAY".equals(loai_sach) || "CA_HAI".equals(loai_sach)) {
             // Tìm bản sao quyển sách có sẵn
             String findCopy = "SELECT ma_quyen FROM QUYEN_SACH WHERE ma_sach = ? AND trang_thai = 'CO_SAN' ORDER BY ma_quyen LIMIT 1";
             try (Cursor cursor = db.rawQuery(findCopy, new String[]{String.valueOf(ma_sach)})) {

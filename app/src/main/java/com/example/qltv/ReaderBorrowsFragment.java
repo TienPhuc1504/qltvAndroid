@@ -106,7 +106,7 @@ public class ReaderBorrowsFragment extends Fragment {
 
             holder.txtTitle.setText(title);
             holder.txtAuthor.setText("Tác giả: " + author + (copyCode != null ? " | Bản sao: " + copyCode : ""));
-            holder.txtDates.setText("Mượn: " + ngayMuon + " | Hạn trả: " + ngayHenTra);
+            holder.txtDates.setText("Mượn: " + DateTimeUtils.formatDate(ngayMuon) + " | Hạn trả: " + DateTimeUtils.formatDate(ngayHenTra));
 
             // Xử lý nạp trạng thái & tiền phạt
             holder.badgeStatus.setText(trangThai);
@@ -127,14 +127,14 @@ public class ReaderBorrowsFragment extends Fragment {
                     holder.badgeStatus.setBackgroundColor(0x1BFF9800);
                 }
 
-                if ("SACH_ONLINE".equals(loaiSach)) {
+                if ("SACH_ONLINE".equals(loaiSach) || "CA_HAI".equals(loaiSach)) {
                     holder.btnReadOnline.setVisibility(View.VISIBLE);
                 }
             } else {
                 holder.badgeStatus.setText("ĐÃ TRẢ");
                 holder.badgeStatus.setTextColor(0xFF4CAF50);
                 holder.badgeStatus.setBackgroundColor(0x1B4CAF50);
-                holder.txtReturnDate.setText("Ngày trả thực: " + ngayTraThuc);
+                holder.txtReturnDate.setText("Ngày trả thực: " + DateTimeUtils.formatDate(ngayTraThuc));
                 holder.txtReturnDate.setVisibility(View.VISIBLE);
 
                 if (fine > 0) {

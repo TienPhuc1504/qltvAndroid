@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,7 +36,7 @@ import java.util.concurrent.Executors;
 public class ReaderSearchFragment extends Fragment {
 
     private EditText editSearch;
-    private Spinner spinnerCategory;
+    private AutoCompleteTextView spinnerCategory;
     private RecyclerView recyclerViewBooks;
     private TextView txtEmpty;
 
@@ -101,23 +103,17 @@ public class ReaderSearchFragment extends Fragment {
                     for (Map<String, Object> cat : categoriesList) {
                         names.add((String) cat.get("ten_the_loai"));
                     }
-                    ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, names);
-                    spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, names);
                     spinnerCategory.setAdapter(spinAdapter);
+                    spinnerCategory.setText("Tất cả thể loại", false);
 
-                    spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            if (position == 0) {
-                                selectedCategoryId = 0;
-                            } else {
-                                selectedCategoryId = (Integer) categoriesList.get(position - 1).get("ma_the_loai");
-                            }
-                            loadBooks();
+                    spinnerCategory.setOnItemClickListener((parent, view1, position, id) -> {
+                        if (position == 0) {
+                            selectedCategoryId = 0;
+                        } else {
+                            selectedCategoryId = (Integer) categoriesList.get(position - 1).get("ma_the_loai");
                         }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {}
+                        loadBooks();
                     });
                 });
             }
@@ -219,10 +215,40 @@ public class ReaderSearchFragment extends Fragment {
             holder.txtBookAuthorReader.setText(tacGia);
             holder.txtBookCategoryReader.setText(tenTheLoai != null ? tenTheLoai : "Thể loại");
 
-            if ("SACH_GIAY".equals(loaiSach)) {
+            LinearLayout.LayoutParams paramsBorrow = (LinearLayout.LayoutParams) holder.btnBorrowActionReader.getLayoutParams();
+            LinearLayout.LayoutParams paramsRead = (LinearLayout.LayoutParams) holder.btnReadOnlineReader.getLayoutParams();
+
+            // Tính toán kích thước nút cố định (125dp) cho nút đơn
+            int singleButtonWidthPx = (int) (125 * holder.itemView.getContext().getResources().getDisplayMetrics().density);
+
+            if ("CA_HAI".equals(loaiSach)) {
+                holder.txtAvailabilityReader.setText("Còn: " + soQuyenCoSan + " / " + tongSoQuyen + " quyển | Online");
+                holder.btnBorrowActionReader.setVisibility(View.VISIBLE);
+                holder.btnReadOnlineReader.setVisibility(View.VISIBLE);
+
+                // Khi có hai nút, tự động chia đôi tỷ lệ 50/50 mượt mà để chống tràn
+                paramsBorrow.width = 0;
+                paramsBorrow.weight = 1.0f;
+                paramsRead.width = 0;
+                paramsRead.weight = 1.0f;
+
+                if (soQuyenCoSan > 0) {
+                    holder.txtAvailabilityReader.setTextColor(0xFF4CAF50); // Xanh lá
+                    holder.btnBorrowActionReader.setEnabled(true);
+                    holder.btnBorrowActionReader.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF00B0FF));
+                } else {
+                    holder.txtAvailabilityReader.setTextColor(0xFFFF5252); // Đỏ
+                    holder.btnBorrowActionReader.setEnabled(false);
+                    holder.btnBorrowActionReader.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF2E2C4D));
+                }
+            } else if ("SACH_GIAY".equals(loaiSach)) {
                 holder.txtAvailabilityReader.setText("Còn: " + soQuyenCoSan + " / " + tongSoQuyen + " quyển");
                 holder.btnBorrowActionReader.setVisibility(View.VISIBLE);
                 holder.btnReadOnlineReader.setVisibility(View.GONE);
+
+                // Nút đơn có độ dài cố định 125dp để đồng bộ
+                paramsBorrow.width = singleButtonWidthPx;
+                paramsBorrow.weight = 0.0f;
 
                 if (soQuyenCoSan > 0) {
                     holder.txtAvailabilityReader.setTextColor(0xFF4CAF50);
@@ -238,7 +264,14 @@ public class ReaderSearchFragment extends Fragment {
                 holder.txtAvailabilityReader.setTextColor(0xFF00B0FF);
                 holder.btnBorrowActionReader.setVisibility(View.GONE);
                 holder.btnReadOnlineReader.setVisibility(View.VISIBLE);
+
+                // Nút đơn có độ dài cố định 125dp để đồng bộ
+                paramsRead.width = singleButtonWidthPx;
+                paramsRead.weight = 0.0f;
             }
+
+            holder.btnBorrowActionReader.setLayoutParams(paramsBorrow);
+            holder.btnReadOnlineReader.setLayoutParams(paramsRead);
 
             // Mượn sách giấy
             holder.btnBorrowActionReader.setOnClickListener(v -> showRequestBorrowDialog(book));

@@ -11,16 +11,21 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchLayout"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Tìm kiếm sách hoặc tác giả..."
         android:textColorHint="#C5C5D2"
         app:boxStrokeColor="#FFFFFF"
         app:boxStrokeWidthFocused="2dp"
         app:hintTextColor="#FFFFFF"
-        app:layout_constraintEnd_toStartOf="@id/spinnerCategory"
-        app:layout_constraintStart_toStartOf="parent"
+        app:boxCornerRadiusTopStart="28dp"
+        app:boxCornerRadiusTopEnd="28dp"
+        app:boxCornerRadiusBottomStart="28dp"
+        app:boxCornerRadiusBottomEnd="28dp"
+        app:boxBackgroundColor="#1E1E2A"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:startIconDrawable="@android:drawable/ic_menu_search"
         app:startIconTint="#C5C5D2">
 
@@ -33,17 +38,36 @@
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Hộp chọn Thể loại -->
-    <Spinner
-        android:id="@+id/spinnerCategory"
-        android:layout_width="140dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:backgroundTint="#181818"
-        app:layout_constraintBottom_toBottomOf="@id/searchLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/searchLayout" />
+    <!-- Hộp chọn Thể loại (Material Exposed Dropdown Menu) -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/spinnerCategoryLayout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Lọc theo thể loại"
+        android:textColorHint="#C5C5D2"
+        app:boxStrokeColor="#FFFFFF"
+        app:boxStrokeWidthFocused="2dp"
+        app:hintTextColor="#FFFFFF"
+        app:boxCornerRadiusTopStart="28dp"
+        app:boxCornerRadiusTopEnd="28dp"
+        app:boxCornerRadiusBottomStart="28dp"
+        app:boxCornerRadiusBottomEnd="28dp"
+        app:boxBackgroundColor="#1E1E2A"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/spinnerCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:background="@android:color/transparent"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Danh sách hiển thị -->
     <androidx.recyclerview.widget.RecyclerView
@@ -54,7 +78,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchLayout"
+        app:layout_constraintTop_toBottomOf="@id/spinnerCategoryLayout"
         tools:listitem="@android:layout/simple_list_item_2" />
 
     <!-- Trạng thái trống (Ẩn mặc định) -->

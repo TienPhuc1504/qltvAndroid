@@ -85,20 +85,7 @@ public class UserRepository {
             readerValues.put("ngay_dk", ngay_dk);
             db.insertOrThrow("DOC_GIA", null, readerValues);
 
-            // 3. Tạo thẻ độc giả THE_DOC_GIA (hạn 1 năm)
-            Calendar cal = Calendar.getInstance();
-            String ngay_cap = sdf.format(cal.getTime());
-            cal.add(Calendar.DAY_OF_YEAR, 365);
-            String ngay_het_han = sdf.format(cal.getTime());
-
-            ContentValues cardValues = new ContentValues();
-            cardValues.put("ma_nd_doc_gia", ma_nd);
-            cardValues.put("ngay_cap", ngay_cap);
-            cardValues.put("ngay_het_han", ngay_het_han);
-            cardValues.put("trang_thai_the", "HOAT_DONG");
-            db.insertOrThrow("THE_DOC_GIA", null, cardValues);
-
-            // 4. Tạo tài khoản TAI_KHOAN
+            // 3. Tạo tài khoản TAI_KHOAN (Thẻ độc giả THE_DOC_GIA sẽ được in thủ công sau này)
             String hashedPw = HashUtils.hashPassword(password);
             ContentValues accountValues = new ContentValues();
             accountValues.put("ten_tk", username.toLowerCase(Locale.ROOT));

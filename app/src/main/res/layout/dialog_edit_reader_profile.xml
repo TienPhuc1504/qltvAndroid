@@ -249,7 +249,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="LƯU THAY ĐỔI"
-                android:backgroundTint="#B0B0B0"
+                android:backgroundTint="#00B0FF"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
     </LinearLayout>

@@ -12,7 +12,7 @@
         android:id="@+id/tabBarLayout"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="#181818"
+        android:background="@drawable/tab_bar_background"
         android:orientation="horizontal"
         android:padding="4dp"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,19 +26,28 @@
             android:text="Mượn Sách"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            app:backgroundTint="#FFFFFF"
-            app:cornerRadius="6dp" />
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            app:backgroundTint="#00B0FF"
+            app:cornerRadius="22dp" />
 
         <Button
             android:id="@+id/btnTabCard"
-            style="@style/Widget.Material3.Button.TextButton"
+            style="@style/Widget.Material3.Button.UnelevatedButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="In Thẻ Độc Giả"
             android:textColor="#C5C5D2"
             android:textStyle="bold"
-            app:cornerRadius="6dp" />
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            app:backgroundTint="#00000000"
+            app:cornerRadius="22dp" />
     </LinearLayout>
 
     <!-- Danh sách yêu cầu -->

@@ -60,38 +60,45 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Spinner Thể loại -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="Thể loại"
-            android:textColor="#C5C5D2"
-            android:textSize="12sp" />
-
-        <Spinner
-            android:id="@+id/spinDialogCatEdit"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#2D2D2D" />
+            android:hint="Thể loại"
+            android:textColorHint="#C5C5D2"
+            app:boxStrokeColor="#FFFFFF"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintTextColor="#FFFFFF">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinDialogCatEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Trạng thái đầu sách giấy (hàng loạt) -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="Trạng thái (áp dụng bản sao chưa mượn)"
-            android:textColor="#C5C5D2"
-            android:textSize="12sp" />
-
-        <Spinner
-            android:id="@+id/spinBookStatusEdit"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:id="@+id/layoutBookStatusEditContainer"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#2D2D2D" />
+            android:hint="Trạng thái (áp dụng bản sao chưa mượn)"
+            android:textColorHint="#C5C5D2"
+            app:boxStrokeColor="#FFFFFF"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintTextColor="#FFFFFF">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinBookStatusEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Phần cấu hình Sách Online -->
         <LinearLayout
@@ -149,7 +156,7 @@
             android:text="LƯU THAY ĐỔI"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            app:backgroundTint="#B0B0B0"
+            app:backgroundTint="#00B0FF"
             app:cornerRadius="10dp" />
 
     </LinearLayout>

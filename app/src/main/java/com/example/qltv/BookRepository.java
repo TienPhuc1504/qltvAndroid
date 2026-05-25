@@ -62,11 +62,18 @@ public class BookRepository {
                 map.put("tieu_de", cursor.getString(cursor.getColumnIndexOrThrow("tieu_de")));
                 map.put("tac_gia", cursor.getString(cursor.getColumnIndexOrThrow("tac_gia")));
                 map.put("trang_thai_sach", cursor.getString(cursor.getColumnIndexOrThrow("trang_thai_sach")));
-                map.put("loai_sach", cursor.getString(cursor.getColumnIndexOrThrow("loai_sach")));
+
+                String loai_sach = cursor.getString(cursor.getColumnIndexOrThrow("loai_sach"));
+                String url = cursor.getString(cursor.getColumnIndexOrThrow("url_tai_lieu"));
+                if ("SACH_GIAY".equals(loai_sach) && url != null && !url.trim().isEmpty()) {
+                    loai_sach = "CA_HAI";
+                }
+                map.put("loai_sach", loai_sach);
+
                 map.put("ma_the_loai", cursor.getInt(cursor.getColumnIndexOrThrow("ma_the_loai")));
                 map.put("ten_the_loai", cursor.getString(cursor.getColumnIndexOrThrow("ten_the_loai")));
                 map.put("so_luong", cursor.getInt(cursor.getColumnIndexOrThrow("so_luong")));
-                map.put("url_tai_lieu", cursor.getString(cursor.getColumnIndexOrThrow("url_tai_lieu")));
+                map.put("url_tai_lieu", url);
                 map.put("dinh_dang", cursor.getString(cursor.getColumnIndexOrThrow("dinh_dang")));
                 map.put("so_quyen_co_san", cursor.getInt(cursor.getColumnIndexOrThrow("so_quyen_co_san")));
                 map.put("tong_so_quyen", cursor.getInt(cursor.getColumnIndexOrThrow("tong_so_quyen")));
@@ -99,11 +106,18 @@ public class BookRepository {
                 book.put("tieu_de", cursor.getString(cursor.getColumnIndexOrThrow("tieu_de")));
                 book.put("tac_gia", cursor.getString(cursor.getColumnIndexOrThrow("tac_gia")));
                 book.put("trang_thai_sach", cursor.getString(cursor.getColumnIndexOrThrow("trang_thai_sach")));
-                book.put("loai_sach", cursor.getString(cursor.getColumnIndexOrThrow("loai_sach")));
+
+                String loai_sach = cursor.getString(cursor.getColumnIndexOrThrow("loai_sach"));
+                String url = cursor.getString(cursor.getColumnIndexOrThrow("url_tai_lieu"));
+                if ("SACH_GIAY".equals(loai_sach) && url != null && !url.trim().isEmpty()) {
+                    loai_sach = "CA_HAI";
+                }
+                book.put("loai_sach", loai_sach);
+
                 book.put("ma_the_loai", cursor.getInt(cursor.getColumnIndexOrThrow("ma_the_loai")));
                 book.put("ten_the_loai", cursor.getString(cursor.getColumnIndexOrThrow("ten_the_loai")));
                 book.put("so_luong", cursor.getInt(cursor.getColumnIndexOrThrow("so_luong")));
-                book.put("url_tai_lieu", cursor.getString(cursor.getColumnIndexOrThrow("url_tai_lieu")));
+                book.put("url_tai_lieu", url);
                 book.put("dinh_dang", cursor.getString(cursor.getColumnIndexOrThrow("dinh_dang")));
                 book.put("so_quyen_co_san", cursor.getInt(cursor.getColumnIndexOrThrow("so_quyen_co_san")));
                 book.put("tong_so_quyen", cursor.getInt(cursor.getColumnIndexOrThrow("tong_so_quyen")));
@@ -125,10 +139,12 @@ public class BookRepository {
             bookValues.put("tac_gia", tac_gia);
             bookValues.put("trang_thai_sach", "CO_SAN");
             bookValues.put("ma_the_loai", ma_the_loai);
-            bookValues.put("loai_sach", loai_sach);
+            // Ánh xạ 'CA_HAI' về 'SACH_GIAY' trong DB để thỏa mãn CHECK constraint
+            String dbLoaiSach = "CA_HAI".equals(loai_sach) ? "SACH_GIAY" : loai_sach;
+            bookValues.put("loai_sach", dbLoaiSach);
             long ma_sach = db.insertOrThrow("SACH", null, bookValues);
 
-            if ("SACH_GIAY".equals(loai_sach)) {
+            if ("SACH_GIAY".equals(loai_sach) || "CA_HAI".equals(loai_sach)) {
                 ContentValues paperValues = new ContentValues();
                 paperValues.put("ma_sach", ma_sach);
                 paperValues.put("so_luong", so_luong);
@@ -146,7 +162,8 @@ public class BookRepository {
                     copyValues.put("ngay_nhap", ngay_nhap);
                     db.insertOrThrow("QUYEN_SACH", null, copyValues);
                 }
-            } else {
+            }
+            if ("SACH_ONLINE".equals(loai_sach) || "CA_HAI".equals(loai_sach)) {
                 ContentValues onlineValues = new ContentValues();
                 onlineValues.put("ma_sach", ma_sach);
                 onlineValues.put("url_tai_lieu", url_tai_lieu);
@@ -183,6 +200,14 @@ public class BookRepository {
                 }
             }
 
+            // Kiểm tra xem có record online không (nghĩa là sách có cả hai hình thức)
+            boolean hasOnlineRecord = false;
+            try (Cursor c = db.rawQuery("SELECT COUNT(*) FROM SACH_ONLINE WHERE ma_sach = ?", new String[]{String.valueOf(ma_sach)})) {
+                if (c.moveToFirst() && c.getInt(0) > 0) {
+                    hasOnlineRecord = true;
+                }
+            }
+
             if ("SACH_GIAY".equals(loai_sach)) {
                 if ("KHONG_CO_SAN".equals(trang_thai)) {
                     ContentValues copyVal = new ContentValues();
@@ -193,11 +218,20 @@ public class BookRepository {
                     copyVal.put("trang_thai", "CO_SAN");
                     db.update("QUYEN_SACH", copyVal, "ma_sach = ? AND trang_thai = 'KHONG_CO_SAN'", new String[]{String.valueOf(ma_sach)});
                 }
-            } else if ("SACH_ONLINE".equals(loai_sach)) {
+            }
+
+            // Cập nhật thông tin sách online (nếu là SACH_ONLINE hoặc là sách giấy có cả hai hình thức / muốn có online)
+            if (url_tai_lieu != null && !url_tai_lieu.trim().isEmpty()) {
                 ContentValues onlineVal = new ContentValues();
+                onlineVal.put("ma_sach", ma_sach);
                 onlineVal.put("url_tai_lieu", url_tai_lieu);
-                onlineVal.put("dinh_dang", dinh_dang);
-                db.update("SACH_ONLINE", onlineVal, "ma_sach = ?", new String[]{String.valueOf(ma_sach)});
+                onlineVal.put("dinh_dang", dinh_dang != null && !dinh_dang.trim().isEmpty() ? dinh_dang : "PDF");
+                db.insertWithOnConflict("SACH_ONLINE", null, onlineVal, SQLiteDatabase.CONFLICT_REPLACE);
+            } else {
+                // Nếu URL rỗng và là sách giấy (hoặc CA_HAI chuyển thành giấy), xóa record online
+                if ("SACH_GIAY".equals(loai_sach)) {
+                    db.delete("SACH_ONLINE", "ma_sach = ?", new String[]{String.valueOf(ma_sach)});
+                }
             }
 
             db.setTransactionSuccessful();

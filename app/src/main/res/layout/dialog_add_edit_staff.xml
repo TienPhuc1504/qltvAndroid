@@ -127,7 +127,7 @@
             android:id="@+id/btnStaffDialogSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#B0B0B0"
+            android:backgroundTint="#00B0FF"
             android:text="LƯU TÀI KHOẢN"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />

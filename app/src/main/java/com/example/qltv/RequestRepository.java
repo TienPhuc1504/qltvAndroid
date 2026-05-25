@@ -29,6 +29,14 @@ public class RequestRepository {
     public long createBorrowRequest(int ma_nd_doc_gia, int ma_sach, int so_ngay_muon_de_xuat, String ghi_chu) throws Exception {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
+        // 0. Kiểm tra thẻ độc giả có tồn tại và HOẠT ĐỘNG hay không
+        String checkCardSql = "SELECT COUNT(*) FROM THE_DOC_GIA WHERE ma_nd_doc_gia = ? AND trang_thai_the = 'HOAT_DONG'";
+        try (Cursor c = db.rawQuery(checkCardSql, new String[]{String.valueOf(ma_nd_doc_gia)})) {
+            if (!c.moveToFirst() || c.getInt(0) == 0) {
+                throw new Exception("Bạn chưa có thẻ độc giả hoặc thẻ chưa được in. Không thể tự gửi yêu cầu mượn sách trên app!");
+            }
+        }
+
         if (so_ngay_muon_de_xuat <= 0 || so_ngay_muon_de_xuat > 30) {
             throw new Exception("Số ngày mượn phải từ 1-30 ngày!");
         }
@@ -88,7 +96,7 @@ public class RequestRepository {
         }
 
         Integer ma_quyen = null;
-        if ("SACH_GIAY".equals(loai_sach)) {
+        if ("SACH_GIAY".equals(loai_sach) || "CA_HAI".equals(loai_sach)) {
             // Lấy quyển sách có sẵn
             String findCopy = "SELECT ma_quyen FROM QUYEN_SACH WHERE ma_sach = ? AND trang_thai = 'CO_SAN' ORDER BY ma_quyen LIMIT 1";
             try (Cursor c = db.rawQuery(findCopy, new String[]{String.valueOf(ma_sach)})) {
@@ -116,9 +124,9 @@ public class RequestRepository {
             }
             long ma_yeu_cau = db.insertOrThrow("YEU_CAU_MUON", null, values);
 
-            // Đặt trước quyển sách bằng cách đổi sang KHONG_CO_SAN
+            // Đặt trước quyển sách bằng cách đổi sang DAT_TRUOC
             if (ma_quyen != null) {
-                db.execSQL("UPDATE QUYEN_SACH SET trang_thai = 'KHONG_CO_SAN' WHERE ma_quyen = ?", new Object[]{ma_quyen});
+                db.execSQL("UPDATE QUYEN_SACH SET trang_thai = 'DAT_TRUOC' WHERE ma_quyen = ?", new Object[]{ma_quyen});
             }
 
             // Gửi thông báo đến toàn bộ nhân viên/admin
@@ -624,6 +632,51 @@ public class RequestRepository {
                     db.insert("THONG_BAO", null, notif);
                 }
             }
+
+            db.setTransactionSuccessful();
+            return ma_yeu_cau;
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    /**
+     * Nhân viên/Admin chủ động tạo yêu cầu in thẻ độc giả (bỏ qua Chờ duyệt, đi thẳng vào Đang xử lý)
+     */
+    public long createStaffCardRequest(int ma_nd_doc_gia, int ma_nd_xu_ly) throws Exception {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // 1. Kiểm tra yêu cầu in thẻ đang chờ duyệt hoặc xử lý
+        String checkSql = "SELECT COUNT(*) FROM YEU_CAU_THE WHERE ma_nd_doc_gia = ? AND trang_thai IN ('CHO_DUYET', 'DANG_XU_LY')";
+        try (Cursor c = db.rawQuery(checkSql, new String[]{String.valueOf(ma_nd_doc_gia)})) {
+            if (c.moveToFirst() && c.getInt(0) > 0) {
+                throw new Exception("Độc giả đã có yêu cầu in thẻ đang được xử lý!");
+            }
+        }
+
+        db.beginTransaction();
+        try {
+            String ngay_tao = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+
+            ContentValues values = new ContentValues();
+            values.put("ma_nd_doc_gia", ma_nd_doc_gia);
+            values.put("ngay_yeu_cau", ngay_tao);
+            values.put("trang_thai", "DANG_XU_LY");
+            values.put("ma_nd_xu_ly", ma_nd_xu_ly);
+            values.put("ngay_xu_ly", ngay_tao);
+            values.put("da_nhan", 0);
+            long ma_yeu_cau = db.insertOrThrow("YEU_CAU_THE", null, values);
+
+            // Gửi thông báo cho Độc giả
+            ContentValues notif = new ContentValues();
+            notif.put("ma_nd", ma_nd_doc_gia);
+            notif.put("tieu_de", "✅ Yêu cầu in thẻ đang được xử lý");
+            notif.put("noi_dung", "Yêu cầu in thẻ của bạn đã được nhân viên tiếp nhận và đang xử lý.");
+            notif.put("loai_thong_bao", "YEU_CAU_DUYET");
+            notif.put("da_doc", 0);
+            notif.put("ngay_tao", ngay_tao);
+            notif.put("link_lien_quan", "yeu_cau_the:" + ma_yeu_cau);
+            db.insert("THONG_BAO", null, notif);
 
             db.setTransactionSuccessful();
             return ma_yeu_cau;

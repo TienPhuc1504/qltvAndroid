@@ -209,7 +209,7 @@ public class ReaderAccountFragment extends Fragment {
 
                     txtCardName.setText(fullName.toUpperCase());
                     txtCardCode.setText("MÃ ĐG: " + (code != null ? code : "Đang chờ cấp"));
-                    txtCardExpiry.setText("HẠN THẺ: " + (expiry != null ? expiry : "Chưa kích hoạt"));
+                    txtCardExpiry.setText("HẠN THẺ: " + (expiry != null ? DateTimeUtils.formatDate(expiry) : "Chưa kích hoạt"));
 
                     txtProfileCode.setText(code != null ? code : "Đang chờ cấp");
                     txtProfilePhone.setText(phoneStr == null || phoneStr.isEmpty() ? "Chưa có" : phoneStr);
@@ -447,7 +447,7 @@ public class ReaderAccountFragment extends Fragment {
 
             holder.txtTitle.setText(title);
             holder.txtBody.setText(body);
-            holder.txtDate.setText(date);
+            holder.txtDate.setText(DateTimeUtils.formatDate(date));
 
             if (daDoc == 0) {
                 holder.viewDot.setVisibility(View.VISIBLE);

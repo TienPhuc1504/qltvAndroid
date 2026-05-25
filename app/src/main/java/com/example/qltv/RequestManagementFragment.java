@@ -194,7 +194,7 @@ public class RequestManagementFragment extends Fragment {
             holder.txtReader.setText(readerName + " (" + readerCode + ")");
             holder.txtBook.setText("Mượn: " + bookTitle + " (" + ("SACH_ONLINE".equals(loaiSach) ? "Ebook" : "Sách giấy") + ")");
             holder.txtProposed.setText("Đề xuất: " + proposedDays + " ngày | Ghi chú: " + (r.get("ghi_chu") != null ? r.get("ghi_chu") : "Không"));
-            holder.txtDate.setText("Ngày yêu cầu: " + reqDate);
+            holder.txtDate.setText("Ngày yêu cầu: " + DateTimeUtils.formatDate(reqDate));
 
             // Nạp trạng thái
             String displayStatus = status;
@@ -319,7 +319,7 @@ public class RequestManagementFragment extends Fragment {
             int daNhan = (int) r.get("da_nhan");
 
             holder.txtReader.setText(readerName + " (" + readerCode + ")");
-            holder.txtDate.setText("Ngày yêu cầu: " + reqDate);
+            holder.txtDate.setText("Ngày yêu cầu: " + DateTimeUtils.formatDate(reqDate));
 
             String displayStatus = status;
             if ("CHO_DUYET".equals(status)) {
@@ -356,7 +356,7 @@ public class RequestManagementFragment extends Fragment {
 
                 if (daNhan == 1) {
                     holder.badgeStatus.setText("ĐÃ GIAO THẺ");
-                    holder.badgeStatus.setTextColor(0xFF2E2C4D);
+                    holder.badgeStatus.setTextColor(0xFF4CAF50);
                     holder.btnConfirmPickup.setVisibility(View.GONE);
                 } else {
                     holder.badgeStatus.setText("ĐÃ IN (CHỜ LẤY)");

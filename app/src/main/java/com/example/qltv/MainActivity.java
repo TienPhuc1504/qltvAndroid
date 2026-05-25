@@ -13,12 +13,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
+
+    public void setBottomNavigationVisibility(int visibility) {
+        if (bottomNavigationView != null) {
+            bottomNavigationView.setVisibility(visibility);
+        }
+    }
 
     private BottomNavigationView bottomNavigationView;
     private SharedPreferences sharedPreferences;

@@ -105,12 +105,12 @@
                 android:id="@+id/btnMyBorrowReadOnline"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:text="ĐỌC SÁCH ONLINE"
+                android:text="ĐỌC NGAY"
                 android:textColor="#FFFFFF"
                 android:textSize="11sp"
                 android:textStyle="bold"
                 android:visibility="gone"
-                app:backgroundTint="#B0B0B0"
+                app:backgroundTint="#4CAF50"
                 app:cornerRadius="6dp" />
         </LinearLayout>
     </LinearLayout>

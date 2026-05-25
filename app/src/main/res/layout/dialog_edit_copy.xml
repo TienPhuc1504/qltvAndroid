@@ -79,7 +79,7 @@
         android:text="LƯU THAY ĐỔI"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:backgroundTint="#B0B0B0"
+        app:backgroundTint="#00B0FF"
         app:cornerRadius="10dp" />
 
 </LinearLayout>

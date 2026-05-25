@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,7 +37,7 @@ import java.util.concurrent.Executors;
 public class BookManagementFragment extends Fragment {
 
     private EditText editSearch;
-    private Spinner spinnerCategory;
+    private AutoCompleteTextView spinnerCategory;
     private RecyclerView recyclerViewBooks;
     private TextView txtEmpty;
     private FloatingActionButton fabAddBook;
@@ -102,23 +103,17 @@ public class BookManagementFragment extends Fragment {
                     for (Map<String, Object> cat : categoriesList) {
                         names.add((String) cat.get("ten_the_loai"));
                     }
-                    ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, names);
-                    spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, names);
                     spinnerCategory.setAdapter(spinAdapter);
+                    spinnerCategory.setText("Tất cả thể loại", false);
 
-                    spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            if (position == 0) {
-                                selectedCategoryId = 0;
-                            } else {
-                                selectedCategoryId = (Integer) categoriesList.get(position - 1).get("ma_the_loai");
-                            }
-                            loadBooks();
+                    spinnerCategory.setOnItemClickListener((parent, view1, position, id) -> {
+                        if (position == 0) {
+                            selectedCategoryId = 0;
+                        } else {
+                            selectedCategoryId = (Integer) categoriesList.get(position - 1).get("ma_the_loai");
                         }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {}
+                        loadBooks();
                     });
                 });
             }
@@ -153,8 +148,9 @@ public class BookManagementFragment extends Fragment {
 
         EditText edtTitle = view.findViewById(R.id.edtTitle);
         EditText edtAuthor = view.findViewById(R.id.edtAuthor);
-        Spinner spinCat = view.findViewById(R.id.spinDialogCat);
-        RadioGroup rgType = view.findViewById(R.id.rgType);
+        AutoCompleteTextView spinCat = view.findViewById(R.id.spinDialogCat);
+        android.widget.CheckBox cbPaper = view.findViewById(R.id.cbPaper);
+        android.widget.CheckBox cbOnline = view.findViewById(R.id.cbOnline);
         LinearLayout layoutPaper = view.findViewById(R.id.layoutPaperOnly);
         LinearLayout layoutOnline = view.findViewById(R.id.layoutOnlineOnly);
         EditText edtQty = view.findViewById(R.id.edtQty);
@@ -162,24 +158,24 @@ public class BookManagementFragment extends Fragment {
         EditText edtFormat = view.findViewById(R.id.edtFormat);
         Button btnSave = view.findViewById(R.id.btnSaveBook);
 
-        // Điền Thể Loại Spinner
+        // Điền Thể Loại AutoCompleteTextView
         List<String> names = new ArrayList<>();
         for (Map<String, Object> cat : categoriesList) {
             names.add((String) cat.get("ten_the_loai"));
         }
-        ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, names);
-        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, names);
         spinCat.setAdapter(spinAdapter);
+        if (!names.isEmpty()) {
+            spinCat.setText(names.get(0), false);
+        }
 
-        // Chuyển loại sách giấy/online
-        rgType.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.rbPaper) {
-                layoutPaper.setVisibility(View.VISIBLE);
-                layoutOnline.setVisibility(View.GONE);
-            } else {
-                layoutPaper.setVisibility(View.GONE);
-                layoutOnline.setVisibility(View.VISIBLE);
-            }
+        // Chuyển loại sách giấy/online bằng CheckBox
+        cbPaper.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            layoutPaper.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+        });
+
+        cbOnline.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            layoutOnline.setVisibility(isChecked ? View.VISIBLE : View.GONE);
         });
 
         AlertDialog dialog = builder.create();
@@ -193,19 +189,47 @@ public class BookManagementFragment extends Fragment {
                 return;
             }
 
-            int catId = (int) categoriesList.get(spinCat.getSelectedItemPosition()).get("ma_the_loai");
-            String loaiSach = (rgType.getCheckedRadioButtonId() == R.id.rbPaper) ? "SACH_GIAY" : "SACH_ONLINE";
+            boolean hasPaper = cbPaper.isChecked();
+            boolean hasOnline = cbOnline.isChecked();
+            if (!hasPaper && !hasOnline) {
+                Toast.makeText(requireContext(), "Vui lòng chọn ít nhất một loại sách (Giấy hoặc Online)!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Tìm thể loại
+            String selectedCatName = spinCat.getText().toString().trim();
+            int findCatPos = -1;
+            for (int i = 0; i < categoriesList.size(); i++) {
+                if (categoriesList.get(i).get("ten_the_loai").equals(selectedCatName)) {
+                    findCatPos = i;
+                    break;
+                }
+            }
+            if (findCatPos == -1) {
+                Toast.makeText(requireContext(), "Vui lòng chọn thể loại hợp lệ!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            int catId = (int) categoriesList.get(findCatPos).get("ma_the_loai");
+
+            // Xác định loại sách (Giấy, Online hoặc Cả hai)
+            String loaiSach = "SACH_GIAY";
+            if (hasPaper && hasOnline) {
+                loaiSach = "CA_HAI";
+            } else if (hasOnline) {
+                loaiSach = "SACH_ONLINE";
+            }
 
             int qty = 1;
             String url = "";
             String format = "PDF";
 
-            if ("SACH_GIAY".equals(loaiSach)) {
+            if (hasPaper) {
                 String qtyStr = edtQty.getText().toString().trim();
                 if (!qtyStr.isEmpty()) {
                     qty = Integer.parseInt(qtyStr);
                 }
-            } else {
+            }
+            if (hasOnline) {
                 url = edtUrl.getText().toString().trim();
                 format = edtFormat.getText().toString().trim();
                 if (url.isEmpty()) {
@@ -217,9 +241,10 @@ public class BookManagementFragment extends Fragment {
             final int finalQty = qty;
             final String finalUrl = url;
             final String finalFormat = format;
+            final String finalLoaiSach = loaiSach;
 
             executorService.execute(() -> {
-                bookRepository.addBook(title, author, catId, loaiSach, finalQty, finalUrl, finalFormat);
+                bookRepository.addBook(title, author, catId, finalLoaiSach, finalQty, finalUrl, finalFormat);
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         Toast.makeText(requireContext(), "Thêm đầu sách thành công!", Toast.LENGTH_SHORT).show();
@@ -241,8 +266,9 @@ public class BookManagementFragment extends Fragment {
 
         EditText edtTitle = view.findViewById(R.id.edtTitleEdit);
         EditText edtAuthor = view.findViewById(R.id.edtAuthorEdit);
-        Spinner spinCat = view.findViewById(R.id.spinDialogCatEdit);
-        Spinner spinStatus = view.findViewById(R.id.spinBookStatusEdit);
+        AutoCompleteTextView spinCat = view.findViewById(R.id.spinDialogCatEdit);
+        AutoCompleteTextView spinStatus = view.findViewById(R.id.spinBookStatusEdit);
+        View layoutBookStatusEditContainer = view.findViewById(R.id.layoutBookStatusEditContainer);
         LinearLayout layoutOnline = view.findViewById(R.id.layoutOnlineOnlyEdit);
         EditText edtUrl = view.findViewById(R.id.edtUrlEdit);
         EditText edtFormat = view.findViewById(R.id.edtFormatEdit);
@@ -264,27 +290,43 @@ public class BookManagementFragment extends Fragment {
                 selectedCatPos = i;
             }
         }
-        ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, names);
-        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, names);
         spinCat.setAdapter(spinAdapter);
-        spinCat.setSelection(selectedCatPos);
+        if (selectedCatPos >= 0 && selectedCatPos < names.size()) {
+            spinCat.setText(names.get(selectedCatPos), false);
+        }
 
         // Load Trạng thái Sách giấy/Online
-        if ("SACH_ONLINE".equals(loaiSach)) {
+        if ("CA_HAI".equals(loaiSach)) {
             layoutOnline.setVisibility(View.VISIBLE);
             edtUrl.setText((String) book.get("url_tai_lieu"));
             edtFormat.setText((String) book.get("dinh_dang"));
-            spinStatus.setVisibility(View.GONE); // Online không cần trạng thái giấy
-        } else {
-            layoutOnline.setVisibility(View.GONE);
-            // Sách giấy: CO_SAN, KHONG_CO_SAN
-            String[] statuses = {"CO_SAN", "KHONG_CO_SAN"};
-            ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, statuses);
+            layoutBookStatusEditContainer.setVisibility(View.VISIBLE);
+            
+            String[] displayStatuses = {"CÓ SẴN", "KHÔNG CÓ SẴN"};
+            ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, displayStatuses);
             spinStatus.setAdapter(statusAdapter);
             if ("KHONG_CO_SAN".equals(book.get("trang_thai_sach"))) {
-                spinStatus.setSelection(1);
+                spinStatus.setText("KHÔNG CÓ SẴN", false);
             } else {
-                spinStatus.setSelection(0);
+                spinStatus.setText("CÓ SẴN", false);
+            }
+        } else if ("SACH_ONLINE".equals(loaiSach)) {
+            layoutOnline.setVisibility(View.VISIBLE);
+            edtUrl.setText((String) book.get("url_tai_lieu"));
+            edtFormat.setText((String) book.get("dinh_dang"));
+            layoutBookStatusEditContainer.setVisibility(View.GONE); // Online không cần trạng thái giấy
+        } else {
+            layoutOnline.setVisibility(View.GONE);
+            layoutBookStatusEditContainer.setVisibility(View.VISIBLE);
+            // Sách giấy: CO_SAN, KHONG_CO_SAN -> Việt hóa thành: CÓ SẴN, KHÔNG CÓ SẴN
+            String[] displayStatuses = {"CÓ SẴN", "KHÔNG CÓ SẴN"};
+            ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, displayStatuses);
+            spinStatus.setAdapter(statusAdapter);
+            if ("KHONG_CO_SAN".equals(book.get("trang_thai_sach"))) {
+                spinStatus.setText("KHÔNG CÓ SẴN", false);
+            } else {
+                spinStatus.setText("CÓ SẴN", false);
             }
         }
 
@@ -299,13 +341,39 @@ public class BookManagementFragment extends Fragment {
                 return;
             }
 
-            int catId = (int) categoriesList.get(spinCat.getSelectedItemPosition()).get("ma_the_loai");
-            String trangThai = spinStatus.getSelectedItem() != null ? spinStatus.getSelectedItem().toString() : "CO_SAN";
+            // Tìm thể loại được chọn
+            String selectedCatName = spinCat.getText().toString().trim();
+            int findCatPos = -1;
+            for (int i = 0; i < categoriesList.size(); i++) {
+                if (categoriesList.get(i).get("ten_the_loai").equals(selectedCatName)) {
+                    findCatPos = i;
+                    break;
+                }
+            }
+            if (findCatPos == -1) {
+                Toast.makeText(requireContext(), "Vui lòng chọn thể loại hợp lệ!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            int catId = (int) categoriesList.get(findCatPos).get("ma_the_loai");
+
+            // Lấy trạng thái được chọn (Việt hóa ngược lại DB thô)
+            String selectedStatusText = spinStatus.getText().toString().trim();
+            String trangThai = "CO_SAN";
+            if ("KHÔNG CÓ SẴN".equals(selectedStatusText)) {
+                trangThai = "KHONG_CO_SAN";
+            }
+
             String url = edtUrl.getText().toString().trim();
             String format = edtFormat.getText().toString().trim();
 
+            if (("SACH_ONLINE".equals(loaiSach) || "CA_HAI".equals(loaiSach)) && url.isEmpty()) {
+                Toast.makeText(requireContext(), "Vui lòng nhập URL tài liệu!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            final String finalTrangThai = trangThai;
             executorService.execute(() -> {
-                bookRepository.updateBook(maSach, title, author, catId, trangThai, url, format);
+                bookRepository.updateBook(maSach, title, author, catId, finalTrangThai, url, format);
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         Toast.makeText(requireContext(), "Cập nhật sách thành công!", Toast.LENGTH_SHORT).show();
@@ -357,19 +425,37 @@ public class BookManagementFragment extends Fragment {
 
                 holder.txtCode.setText(maQuyenSach);
                 holder.txtInfo.setText("Vị trí: " + (viTri == null ? "Chưa rõ" : viTri) + " | " + (ghiChu == null ? "Không ghi chú" : ghiChu));
-                holder.txtStatus.setText(trangThai);
 
-                // Màu sắc trạng thái
+                // Việt hóa trạng thái quyển sách và thiết lập màu sắc tương ứng
+                String trangThaiViet = trangThai;
                 if ("CO_SAN".equals(trangThai)) {
+                    trangThaiViet = "CÓ SẴN";
                     holder.txtStatus.setTextColor(0xFF4CAF50); // Xanh lá
                 } else if ("DANG_MUON".equals(trangThai)) {
+                    trangThaiViet = "ĐANG MƯỢN";
                     holder.txtStatus.setTextColor(0xFF00B0FF); // Xanh dương
-                } else {
+                } else if ("DAT_TRUOC".equals(trangThai)) {
+                    trangThaiViet = "ĐẶT TRƯỚC";
+                    holder.txtStatus.setTextColor(0xFFFF9800); // Cam
+                } else if ("KHONG_CO_SAN".equals(trangThai)) {
+                    trangThaiViet = "KHÔNG CÓ SẴN";
+                    holder.txtStatus.setTextColor(0xFFBFBFCF); // Bạc/xám
+                } else if ("HONG".equals(trangThai)) {
+                    trangThaiViet = "HỎNG";
+                    holder.txtStatus.setTextColor(0xFFFF5252); // Đỏ
+                } else if ("MAT".equals(trangThai)) {
+                    trangThaiViet = "MẤT";
                     holder.txtStatus.setTextColor(0xFFFF5252); // Đỏ
                 }
+                holder.txtStatus.setText(trangThaiViet);
 
                 // Nút sửa vị trí/ghi chú bản sao
                 holder.btnEdit.setOnClickListener(v -> {
+                    if ("DANG_MUON".equals(trangThai) || "DAT_TRUOC".equals(trangThai)) {
+                        Toast.makeText(requireContext(), "Không thể chỉnh sửa bản sao đang được mượn hoặc đặt trước!", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
                     AlertDialog.Builder editB = new AlertDialog.Builder(requireContext());
                     View ev = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_edit_copy, null);
                     editB.setView(ev);
@@ -383,7 +469,8 @@ public class BookManagementFragment extends Fragment {
                     edNote.setText(ghiChu);
 
                     String[] statuses = {"CO_SAN", "KHONG_CO_SAN", "HONG", "MAT"};
-                    ArrayAdapter<String> sAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, statuses);
+                    String[] displayStatuses = {"CÓ SẴN", "KHÔNG CÓ SẴN", "HỎNG", "MẤT"};
+                    ArrayAdapter<String> sAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, displayStatuses);
                     spStatus.setAdapter(sAdapter);
                     for (int i = 0; i < statuses.length; i++) {
                         if (statuses[i].equals(trangThai)) {
@@ -398,7 +485,8 @@ public class BookManagementFragment extends Fragment {
                     btnSave.setOnClickListener(sv -> {
                         String newPos = edPos.getText().toString().trim();
                         String newNote = edNote.getText().toString().trim();
-                        String newStatus = spStatus.getSelectedItem().toString();
+                        int selectedPos = spStatus.getSelectedItemPosition();
+                        String newStatus = (selectedPos >= 0 && selectedPos < statuses.length) ? statuses[selectedPos] : "CO_SAN";
 
                         executorService.execute(() -> {
                             bookRepository.updateBookCopy(maQuyen, newStatus, newPos, newNote);
@@ -414,6 +502,11 @@ public class BookManagementFragment extends Fragment {
 
                 // Nút xóa bản sao
                 holder.btnDelete.setOnClickListener(v -> {
+                    if ("DANG_MUON".equals(trangThai) || "DAT_TRUOC".equals(trangThai)) {
+                        Toast.makeText(requireContext(), "Không thể xóa bản sao đang được mượn hoặc đặt trước!", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
                     new AlertDialog.Builder(requireContext())
                         .setTitle("Xóa bản sao")
                         .setMessage("Bạn có chắc chắn muốn xóa bản sao " + maQuyenSach + "?")
@@ -519,7 +612,18 @@ public class BookManagementFragment extends Fragment {
             holder.txtBookAuthor.setText(tacGia);
             holder.txtBookCategory.setText(tenTheLoai != null ? tenTheLoai : "Không thể loại");
 
-            if ("SACH_GIAY".equals(loaiSach)) {
+            if ("CA_HAI".equals(loaiSach)) {
+                holder.badgeBookType.setText("GIẤY & ONLINE");
+                holder.badgeBookType.setTextColor(0xFFE040FB); // Tím hồng sáng
+                holder.txtAvailability.setText("Có sẵn: " + soQuyenCoSan + " / " + tongSoQuyen + " quyển");
+                holder.btnManageCopies.setVisibility(View.VISIBLE);
+
+                if (soQuyenCoSan > 0) {
+                    holder.txtAvailability.setTextColor(0xFF4CAF50); // xanh lá
+                } else {
+                    holder.txtAvailability.setTextColor(0xFFFF5252); // đỏ
+                }
+            } else if ("SACH_GIAY".equals(loaiSach)) {
                 holder.badgeBookType.setText("SÁCH GIẤY");
                 holder.badgeBookType.setTextColor(0xFF00B0FF);
                 holder.txtAvailability.setText("Có sẵn: " + soQuyenCoSan + " / " + tongSoQuyen + " quyển");

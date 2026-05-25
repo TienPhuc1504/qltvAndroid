@@ -61,47 +61,49 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Spinner Thể loại -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="Thể loại"
-            android:textColor="#C5C5D2"
-            android:textSize="12sp" />
-
-        <Spinner
-            android:id="@+id/spinDialogCat"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="#2D2D2D" />
+            android:hint="Thể loại"
+            android:textColorHint="#C5C5D2"
+            app:boxStrokeColor="#FFFFFF"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintTextColor="#FFFFFF">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinDialogCat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Lựa chọn Loại sách -->
-        <RadioGroup
-            android:id="@+id/rgType"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:checkedButton="@id/rbPaper"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rbPaper"
+            <CheckBox
+                android:id="@+id/cbPaper"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Sách giấy"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:checked="true" />
 
-            <RadioButton
-                android:id="@+id/rbOnline"
+            <CheckBox
+                android:id="@+id/cbOnline"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Sách online"
                 android:textColor="#FFFFFF" />
-        </RadioGroup>
+        </LinearLayout>
 
         <!-- Phần cấu hình Sách Giấy -->
         <LinearLayout

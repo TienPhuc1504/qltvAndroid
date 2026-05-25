@@ -11,6 +11,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,6 +24,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,11 +36,10 @@ import java.util.concurrent.Executors;
 
 public class BorrowManagementFragment extends Fragment {
 
-    private EditText edtCheckoutReader, edtCheckoutBook;
-    private Button btnSubmitCheckout;
     private EditText editSearchBorrow;
     private RecyclerView recyclerViewBorrows;
     private TextView txtEmptyBorrow;
+    private FloatingActionButton fabAddBorrow;
 
     private BorrowRepository borrowRepository;
     private ExecutorService executorService;
@@ -57,18 +60,16 @@ public class BorrowManagementFragment extends Fragment {
         sharedPreferences = requireContext().getSharedPreferences("QLTV_PREF", Context.MODE_PRIVATE);
         currentStaffId = sharedPreferences.getInt("userId", 0);
 
-        edtCheckoutReader = view.findViewById(R.id.edtCheckoutReader);
-        edtCheckoutBook = view.findViewById(R.id.edtCheckoutBook);
-        btnSubmitCheckout = view.findViewById(R.id.btnSubmitCheckout);
         editSearchBorrow = view.findViewById(R.id.editSearchBorrow);
         recyclerViewBorrows = view.findViewById(R.id.recyclerViewBorrows);
         txtEmptyBorrow = view.findViewById(R.id.txtEmptyBorrow);
+        fabAddBorrow = view.findViewById(R.id.fabAddBorrow);
 
         recyclerViewBorrows.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new BorrowAdapter();
         recyclerViewBorrows.setAdapter(adapter);
 
-        btnSubmitCheckout.setOnClickListener(v -> performCheckout());
+        fabAddBorrow.setOnClickListener(v -> showAddBorrowDialog());
 
         editSearchBorrow.addTextChangedListener(new TextWatcher() {
             @Override
@@ -87,7 +88,7 @@ public class BorrowManagementFragment extends Fragment {
         loadBorrows();
 
         return view;
-    }
+     }
 
     private void loadBorrows() {
         executorService.execute(() -> {
@@ -108,53 +109,112 @@ public class BorrowManagementFragment extends Fragment {
         });
     }
 
-    /**
-     * Lập phiếu mượn tại quầy
-     */
-    private void performCheckout() {
-        String readerCode = edtCheckoutReader.getText().toString().trim();
-        String bookIdStr = edtCheckoutBook.getText().toString().trim();
-
-        if (readerCode.isEmpty() || bookIdStr.isEmpty()) {
-            Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ Mã độc giả và Mã sách!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        executorService.execute(() -> {
-            SQLiteDatabase db = new DatabaseOpenHelper(requireContext()).getReadableDatabase();
-            int maNdDocGia = 0;
-            
-            // 1. Phân giải Mã Độc giả thành ma_nd
-            String resolveReader = "SELECT ma_nd FROM DOC_GIA WHERE LOWER(ma_doc_gia) = LOWER(?)";
-            try (Cursor c = db.rawQuery(resolveReader, new String[]{readerCode})) {
-                if (c.moveToFirst()) {
-                    maNdDocGia = c.getInt(0);
-                } else {
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "Không tìm thấy Mã Độc giả " + readerCode, Toast.LENGTH_LONG).show());
-                    }
-                    db.close();
-                    return;
-                }
+    private List<Map<String, Object>> getReadersList() {
+        List<Map<String, Object>> list = new ArrayList<>();
+        SQLiteDatabase db = new DatabaseOpenHelper(requireContext()).getReadableDatabase();
+        String sql = "SELECT nd.ma_nd, nd.ho_ten, dg.ma_doc_gia FROM NGUOI_DUNG nd JOIN DOC_GIA dg ON nd.ma_nd = dg.ma_nd ORDER BY nd.ho_ten ASC";
+        try (Cursor c = db.rawQuery(sql, null)) {
+            while (c.moveToNext()) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("ma_nd", c.getInt(0));
+                map.put("ho_ten", c.getString(1));
+                map.put("ma_doc_gia", c.getString(2));
+                list.add(map);
             }
-            db.close();
+        }
+        db.close();
+        return list;
+    }
 
-            int maSach = Integer.parseInt(bookIdStr);
-            try {
-                // 2. Tạo phiếu mượn (14 ngày)
-                borrowRepository.createBorrow(maNdDocGia, currentStaffId, maSach, 14);
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        Toast.makeText(requireContext(), "Lập phiếu mượn sách thành công!", Toast.LENGTH_SHORT).show();
-                        edtCheckoutReader.setText("");
-                        edtCheckoutBook.setText("");
-                        loadBorrows();
+    private List<Map<String, Object>> getBooksList() {
+        List<Map<String, Object>> list = new ArrayList<>();
+        SQLiteDatabase db = new DatabaseOpenHelper(requireContext()).getReadableDatabase();
+        String sql = "SELECT ma_sach, tieu_de, tac_gia FROM SACH ORDER BY tieu_de ASC";
+        try (Cursor c = db.rawQuery(sql, null)) {
+            while (c.moveToNext()) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("ma_sach", c.getInt(0));
+                map.put("tieu_de", c.getString(1));
+                map.put("tac_gia", c.getString(2));
+                list.add(map);
+            }
+        }
+        db.close();
+        return list;
+    }
+
+    /**
+     * Lập phiếu mượn tại quầy bằng Autocomplete Dialog
+     */
+    private void showAddBorrowDialog() {
+        executorService.execute(() -> {
+            List<Map<String, Object>> readers = getReadersList();
+            List<Map<String, Object>> books = getBooksList();
+
+            if (isAdded()) {
+                requireActivity().runOnUiThread(() -> {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                    View view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_borrow, null);
+                    builder.setView(view);
+
+                    AutoCompleteTextView autoReader = view.findViewById(R.id.autoCompleteReader);
+                    AutoCompleteTextView autoBook = view.findViewById(R.id.autoCompleteBook);
+                    Button btnSave = view.findViewById(R.id.btnSaveBorrow);
+
+                    List<String> readerStrings = new ArrayList<>();
+                    for (Map<String, Object> r : readers) {
+                        readerStrings.add(r.get("ho_ten") + " (" + r.get("ma_doc_gia") + ")");
+                    }
+
+                    List<String> bookStrings = new ArrayList<>();
+                    for (Map<String, Object> b : books) {
+                        bookStrings.add(b.get("tieu_de") + " - " + b.get("tac_gia") + " (Mã: " + b.get("ma_sach") + ")");
+                    }
+
+                    ArrayAdapter<String> readerAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, readerStrings);
+                    autoReader.setAdapter(readerAdapter);
+                    autoReader.setThreshold(1);
+
+                    ArrayAdapter<String> bookAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, bookStrings);
+                    autoBook.setAdapter(bookAdapter);
+                    autoBook.setThreshold(1);
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                    btnSave.setOnClickListener(v -> {
+                        String selectedReaderText = autoReader.getText().toString();
+                        String selectedBookText = autoBook.getText().toString();
+
+                        int readerIdx = readerStrings.indexOf(selectedReaderText);
+                        int bookIdx = bookStrings.indexOf(selectedBookText);
+
+                        if (readerIdx == -1 || bookIdx == -1) {
+                            Toast.makeText(requireContext(), "Vui lòng chọn Độc giả và Đầu sách hợp lệ từ danh sách gợi ý!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        int maNdDocGia = (int) readers.get(readerIdx).get("ma_nd");
+                        int maSach = (int) books.get(bookIdx).get("ma_sach");
+
+                        executorService.execute(() -> {
+                            try {
+                                borrowRepository.createBorrow(maNdDocGia, currentStaffId, maSach, 14);
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        Toast.makeText(requireContext(), "Lập phiếu mượn sách thành công!", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                        loadBorrows();
+                                    });
+                                }
+                            } catch (Exception e) {
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "Lỗi: " + e.getMessage(), Toast.LENGTH_LONG).show());
+                                }
+                            }
+                        });
                     });
-                }
-            } catch (Exception e) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "Lỗi: " + e.getMessage(), Toast.LENGTH_LONG).show());
-                }
+                });
             }
         });
     }
@@ -232,7 +292,7 @@ public class BorrowManagementFragment extends Fragment {
                 holder.txtCopyCode.setVisibility(View.GONE);
             }
 
-            holder.txtDates.setText("Mượn: " + ngayMuon + " | Hạn trả: " + ngayHenTra);
+            holder.txtDates.setText("Mượn: " + DateTimeUtils.formatDate(ngayMuon) + " | Hạn trả: " + DateTimeUtils.formatDate(ngayHenTra));
 
             if (fine > 0) {
                 holder.badgeStatus.setText("QUÁ HẠN");

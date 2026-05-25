@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ import java.util.concurrent.Executors;
 public class ReaderRequestsFragment extends Fragment {
 
     private Button btnTabBorrow, btnTabCard;
-    private MaterialButton btnNewCardRequest;
+    private ExtendedFloatingActionButton btnNewCardRequest;
     private RecyclerView recyclerViewRequests;
     private TextView txtEmptyRequest;
 
@@ -201,7 +202,7 @@ public class ReaderRequestsFragment extends Fragment {
 
             holder.txtBook.setText("Mượn: " + title);
             holder.txtDays.setText("Đề xuất: " + proposedDays + " ngày | Ghi chú: " + (r.get("ghi_chu") != null ? r.get("ghi_chu") : "Không"));
-            holder.txtDate.setText("Ngày gửi: " + reqDate);
+            holder.txtDate.setText("Ngày gửi: " + DateTimeUtils.formatDate(reqDate));
 
             String displayStatus = status;
             if ("CHO_DUYET".equals(status)) {
@@ -285,7 +286,7 @@ public class ReaderRequestsFragment extends Fragment {
             int daNhan = (int) r.get("da_nhan");
             String reason = (String) r.get("ly_do_tu_choi");
 
-            holder.txtDate.setText("Ngày yêu cầu: " + date);
+            holder.txtDate.setText("Ngày yêu cầu: " + DateTimeUtils.formatDate(date));
             String displayStatus = status;
             if ("CHO_DUYET".equals(status)) {
                 displayStatus = "CHỜ DUYỆT";
@@ -311,7 +312,7 @@ public class ReaderRequestsFragment extends Fragment {
                 holder.badgeStatus.setTextColor(0xFF4CAF50);
                 if (daNhan == 1) {
                     holder.badgeStatus.setText("ĐÃ GIAO THẺ");
-                    holder.badgeStatus.setTextColor(0xFF2E2C4D);
+                    holder.badgeStatus.setTextColor(0xFF4CAF50);
                     holder.txtPickup.setText("Đã nhận thẻ độc giả vật lý tại thư viện!");
                     holder.txtPickup.setVisibility(View.VISIBLE);
                 } else {

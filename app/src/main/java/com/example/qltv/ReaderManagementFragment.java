@@ -2,6 +2,7 @@ package com.example.qltv;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -46,7 +47,9 @@ public class ReaderManagementFragment extends Fragment {
 
     private UserRepository userRepository;
     private BorrowRepository borrowRepository;
+    private RequestRepository requestRepository;
     private ExecutorService executorService;
+    private SharedPreferences sharedPreferences;
     
     private List<Map<String, Object>> readersList = new ArrayList<>();
     private ReaderAdapter adapter;
@@ -59,6 +62,8 @@ public class ReaderManagementFragment extends Fragment {
 
         userRepository = new UserRepository(requireContext());
         borrowRepository = new BorrowRepository(requireContext());
+        requestRepository = new RequestRepository(requireContext());
+        sharedPreferences = requireContext().getSharedPreferences("QLTV_PREF", Context.MODE_PRIVATE);
         executorService = Executors.newSingleThreadExecutor();
 
         editSearchReader = view.findViewById(R.id.editSearchReader);
@@ -182,7 +187,7 @@ public class ReaderManagementFragment extends Fragment {
         txtPhone.setText("Số điện thoại: " + reader.get("so_dt"));
         txtEmail.setText("Email: " + reader.get("email"));
         txtAddress.setText("Địa chỉ: " + reader.get("dia_chi"));
-        txtRegDate.setText("Ngày đăng ký: " + reader.get("ngay_dk"));
+        txtRegDate.setText("Ngày đăng ký: " + DateTimeUtils.formatDate((String) reader.get("ngay_dk")));
 
         if (status != null) {
             String displayStatus = status;
@@ -190,8 +195,8 @@ public class ReaderManagementFragment extends Fragment {
             else if ("KHOA".equals(status)) displayStatus = "BỊ KHÓA";
             else if ("HET_HAN".equals(status)) displayStatus = "HẾT HẠN";
             txtCardStatus.setText("Trạng thái thẻ: " + displayStatus);
-            txtCardStart.setText("Ngày cấp thẻ: " + reader.get("ngay_cap"));
-            txtCardEnd.setText("Ngày hết hạn: " + reader.get("ngay_het_han"));
+            txtCardStart.setText("Ngày cấp thẻ: " + DateTimeUtils.formatDate((String) reader.get("ngay_cap")));
+            txtCardEnd.setText("Ngày hết hạn: " + DateTimeUtils.formatDate((String) reader.get("ngay_het_han")));
             if ("HOAT_DONG".equals(status)) {
                 txtCardStatus.setTextColor(0xFF4CAF50);
             } else {
@@ -276,15 +281,34 @@ public class ReaderManagementFragment extends Fragment {
         txtCardName.setText(((String) reader.get("ho_ten")).toUpperCase(Locale.ROOT));
         txtCardCode.setText("MÃ ĐG: " + reader.get("ma_doc_gia"));
         String exp = (String) reader.get("ngay_het_han");
-        txtCardExpiry.setText("HẠN THẺ: " + (exp != null ? exp : "CHƯA CÓ"));
+        txtCardExpiry.setText("HẠN THẺ: " + (exp != null ? DateTimeUtils.formatDate(exp) : "CHƯA CÓ"));
 
         AlertDialog dialog = builder.create();
         dialog.show();
 
+        int maNd = (int) reader.get("ma_nd");
+        int currentStaffId = sharedPreferences.getInt("userId", 0);
+
         btnClose.setOnClickListener(v -> dialog.dismiss());
         btnPrint.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Đã mô phỏng gửi tệp thẻ PDF tới máy in thành công!", Toast.LENGTH_LONG).show();
-            dialog.dismiss();
+            executorService.execute(() -> {
+                try {
+                    requestRepository.createStaffCardRequest(maNd, currentStaffId);
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            Toast.makeText(requireContext(), "Đã tạo yêu cầu in thẻ! Trạng thái: Đang xử lý.", Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
+                            loadReaders();
+                        });
+                    }
+                } catch (Exception e) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            Toast.makeText(requireContext(), "Lỗi: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        });
+                    }
+                }
+            });
         });
     }
 
@@ -317,14 +341,14 @@ public class ReaderManagementFragment extends Fragment {
             public void onBindViewHolder(@NonNull HistViewHolder holder, int position) {
                 Map<String, Object> h = histList.get(position);
                 holder.txtTitle.setText((String) h.get("tieu_de"));
-                holder.txtDates.setText("Mượn: " + h.get("ngay_muon") + " | Hạn trả: " + h.get("ngay_hen_tra"));
+                holder.txtDates.setText("Mượn: " + DateTimeUtils.formatDate((String) h.get("ngay_muon")) + " | Hạn trả: " + DateTimeUtils.formatDate((String) h.get("ngay_hen_tra")));
                 
                 String ngayTra = (String) h.get("ngay_tra_thuc");
                 double fine = (double) h.get("tien_phat");
                 holder.txtFine.setText("Phạt: " + String.format(Locale.getDefault(), "%,.0f", fine) + " VND");
 
                 if (ngayTra != null) {
-                    holder.txtReturn.setText("Đã trả: " + ngayTra);
+                    holder.txtReturn.setText("Đã trả: " + DateTimeUtils.formatDate(ngayTra));
                     holder.txtReturn.setTextColor(0xFF4CAF50);
                 } else {
                     holder.txtReturn.setText("ĐANG MƯỢN");

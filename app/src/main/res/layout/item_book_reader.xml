@@ -69,47 +69,50 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtAvailabilityReader"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Có sẵn: 3 / 8 quyển"
                 android:textColor="#E0E0E0"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="end|center_vertical"
+                android:orientation="horizontal">
 
-            <!-- Nút Yêu cầu mượn (cho sách giấy) -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBorrowActionReader"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:text="MƯỢN SÁCH"
-                android:textColor="#FFFFFF"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                app:backgroundTint="#00B0FF"
-                app:cornerRadius="6dp" />
+                <!-- Nút Yêu cầu mượn (cho sách giấy) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBorrowActionReader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:text="MƯỢN SÁCH"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="#00B0FF"
+                    app:cornerRadius="6dp" />
 
-            <!-- Nút Đọc Online (cho sách online) -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnReadOnlineReader"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:text="ĐỌC ONLINE"
-                android:textColor="#FFFFFF"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:visibility="gone"
-                app:backgroundTint="#B0B0B0"
-                app:cornerRadius="6dp" />
+                <!-- Nút Đọc Online (cho sách online) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnReadOnlineReader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="8dp"
+                    android:text="ĐỌC NGAY"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:backgroundTint="#4CAF50"
+                    app:cornerRadius="6dp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

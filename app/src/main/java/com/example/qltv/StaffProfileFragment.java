@@ -208,18 +208,27 @@ public class StaffProfileFragment extends Fragment {
             layoutStaffMgmtView.setVisibility(View.GONE);
             btnProfileBack.setVisibility(View.GONE);
             txtHeaderTitle.setText("HỒ SƠ CỦA BẠN");
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).setBottomNavigationVisibility(View.VISIBLE);
+            }
         } else if (type == PanelType.STATS) {
             layoutHome.setVisibility(View.GONE);
             layoutStatsView.setVisibility(View.VISIBLE);
             layoutStaffMgmtView.setVisibility(View.GONE);
             btnProfileBack.setVisibility(View.VISIBLE);
             txtHeaderTitle.setText("BÁO CÁO THỐNG KÊ");
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).setBottomNavigationVisibility(View.GONE);
+            }
         } else {
             layoutHome.setVisibility(View.GONE);
             layoutStatsView.setVisibility(View.GONE);
             layoutStaffMgmtView.setVisibility(View.VISIBLE);
             btnProfileBack.setVisibility(View.VISIBLE);
             txtHeaderTitle.setText("QUẢN LÝ NHÂN VIÊN");
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).setBottomNavigationVisibility(View.GONE);
+            }
         }
     }
 
@@ -328,6 +337,14 @@ public class StaffProfileFragment extends Fragment {
                     layoutCategoryStatsContainer.removeAllViews();
                     List<Map<String, Object>> categories = (List<Map<String, Object>>) stats.get("by_category");
                     if (categories != null) {
+                        int catIndex = 0;
+                        int[] progressColors = {
+                            0xFF00B0FF, // Blue
+                            0xFFE040FB, // Purple
+                            0xFFFF5252, // Red
+                            0xFF69F0AE, // Green
+                            0xFFFFD740  // Yellow
+                        };
                         for (Map<String, Object> cat : categories) {
                             String name = (String) cat.get("category_name");
                             int count = (int) cat.get("count");
@@ -345,7 +362,14 @@ public class StaffProfileFragment extends Fragment {
                                 percent = (int) Math.round(((double) count / totalBooks) * 100);
                             }
                             pb.setProgress(percent);
+                            
+                            // Thay đổi màu progressTint động
+                            int color = progressColors[catIndex % progressColors.length];
+                            pb.setProgressTintList(android.content.res.ColorStateList.valueOf(color));
+                            pb.setProgressBackgroundTintList(android.content.res.ColorStateList.valueOf((color & 0x00FFFFFF) | 0x22000000));
+
                             layoutCategoryStatsContainer.addView(catView);
+                            catIndex++;
                         }
                     }
 

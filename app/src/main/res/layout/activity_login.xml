@@ -23,12 +23,12 @@
             <!-- Tiêu đề App -->
             <ImageView
                 android:id="@+id/imgLogo"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:layout_marginTop="32dp"
+                android:layout_width="288dp"
+                android:layout_height="288dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="-110dp"
                 android:contentDescription="Library Logo"
-                android:src="@android:drawable/ic_menu_myplaces"
-                app:tint="#FFFFFF" />
+                android:src="@drawable/logo" />
 
             <TextView
                 android:id="@+id/txtAppName"
@@ -237,7 +237,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:visibility="gone"
-                        app:backgroundTint="#B0B0B0"
+                        app:backgroundTint="#00B0FF"
                         app:cornerRadius="12dp" />
 
                     <!-- Dòng chuyển đổi Form -->

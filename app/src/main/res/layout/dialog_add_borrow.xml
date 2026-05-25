@@ -12,65 +12,65 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtBorrowDialogTitle"
+            android:id="@+id/txtFormTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:text="GỬI YÊU CẦU MƯỢN SÁCH"
+            android:layout_gravity="center"
+            android:layout_marginBottom="18dp"
+            android:text="LẬP PHIẾU MƯỢN SÁCH MỚI"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!-- Số ngày mượn đề xuất -->
+        <!-- Ô chọn độc giả -->
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="Số ngày đề xuất mượn (1 - 30)"
+            android:layout_marginBottom="16dp"
+            android:hint="Chọn độc giả"
             android:textColorHint="#C5C5D2"
             app:boxStrokeColor="#FFFFFF"
             app:boxStrokeWidthFocused="2dp"
             app:hintTextColor="#FFFFFF">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtBorrowDialogDays"
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteReader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:text="14"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Ghi chú mượn -->
+        <!-- Ô chọn đầu sách -->
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:hint="Ghi chú thêm"
+            android:layout_marginBottom="24dp"
+            android:hint="Chọn đầu sách"
             android:textColorHint="#C5C5D2"
             app:boxStrokeColor="#FFFFFF"
             app:boxStrokeWidthFocused="2dp"
             app:hintTextColor="#FFFFFF">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtBorrowDialogNotes"
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteBook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Nút gửi yêu cầu -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBorrowDialogSend"
+            android:id="@+id/btnSaveBorrow"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:text="GỬI YÊU CẦU DUYỆT"
+            android:text="XÁC NHẬN CHO MƯỢN (14 NGÀY)"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:backgroundTint="#00B0FF"
             app:cornerRadius="10dp" />
+
     </LinearLayout>
 </ScrollView>
