@@ -124,9 +124,9 @@ public class RequestRepository {
             }
             long ma_yeu_cau = db.insertOrThrow("YEU_CAU_MUON", null, values);
 
-            // Đặt trước quyển sách bằng cách đổi sang DAT_TRUOC
+            // Đặt trước quyển sách bằng cách đổi sang KHONG_CO_SAN để hợp lệ với ràng buộc CHECK trong CSDL
             if (ma_quyen != null) {
-                db.execSQL("UPDATE QUYEN_SACH SET trang_thai = 'DAT_TRUOC' WHERE ma_quyen = ?", new Object[]{ma_quyen});
+                db.execSQL("UPDATE QUYEN_SACH SET trang_thai = 'KHONG_CO_SAN' WHERE ma_quyen = ?", new Object[]{ma_quyen});
             }
 
             // Gửi thông báo đến toàn bộ nhân viên/admin
